@@ -1,0 +1,59 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  width: 100%;
+}
+
+body {
+  background-color: red;
+  color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  width: 100%;
+}
+
+.app {
+  margin: 2rem;
+  padding: 2rem;
+  border: 0.5rem solid yellow;
+  box-sizing: border-box;
+}
+
+h6 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+h5 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+h4 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+h3 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+h2 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+h1 {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+p {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+input {
+  background-color: yellow;
+  color: red;
+  font-size: 1.5rem;
+  padding: 1rem;
+}

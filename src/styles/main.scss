@@ -1,0 +1,80 @@
+$font-sans: "Source Sans Pro", sans-serif;
+$font-serif: "Source Serif Pro", serif;
+$font-monospace: "Fira Code", "Source Code Pro", monospace;
+$color-foreground: #fff;
+$color-background: #000;
+$color-text: #fff;
+$color-primary: #fff;
+$color-danger: red;
+
+
+
+
+$color-foreground: yellow;
+$color-background: red;
+$color-text: yellow;
+$color-primary: yellow;
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+#root{
+  width: 100%;
+}
+
+body {
+  background-color: $color-background;
+  color: $color-foreground;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  width: 100%;
+}
+
+.app {
+
+
+  margin: 2rem;
+  padding: 2rem;
+  border: 0.5rem solid $color-primary;
+  box-sizing: border-box;
+}
+
+h6 {
+  font-family: $font-monospace;
+}
+h5 {
+  font-family: $font-monospace;
+}
+h4 {
+  font-family: $font-monospace;
+}
+h3 {
+  font-family: $font-monospace;
+}
+h2 {
+  font-family: $font-monospace;
+}
+h1 {
+  font-family: $font-monospace;
+}
+
+p {
+  font-family: $font-sans;
+}
+
+
+input {
+  background-color: $color-primary;
+  color:$color-background;
+  font-size: 1.5rem;
+    padding: 1rem;
+}
+
+
