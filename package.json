@@ -2,7 +2,6 @@
   "name": "fyp-build-01",
   "version": "0.1.0",
   "private": true,
-
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -20,7 +19,6 @@
     "eject": "react-scripts eject",
     "json-server": "json-server --watch data/test.json --port 5000",
     "dev": "concurrently \"npm start\" \"npm run json-server\""
-  
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +40,5 @@
   },
   "devDependencies": {
     "concurrently": "^6.4.0"
-  
   }
 }
