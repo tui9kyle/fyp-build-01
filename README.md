@@ -3,8 +3,11 @@
 Local Differential Privacy in the Temporal Setting
 
 > The Hong Kong Polytechnic University
+
 > Department of Electronic and Information Engineering
+
 > EIE4430 Honors Project
+
 > Differentially Private Time Series Data Release II
 
 ## Objectives
