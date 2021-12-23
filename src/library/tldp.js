@@ -3,11 +3,6 @@
 // Local Differential Privacy in Temporal Setting
 
 
-class TLDPData {
-    static data;
-    constructor(data) { this.data = data }
-}
-
 
 class LDPUtilities {
 
@@ -28,9 +23,9 @@ class LDPUtilities {
 export class TLDP {
 
     static utilities = new LDPUtilities();
-    data;
-
-    constructor(data) { this.data = new TLDPData(data) }
+    dataRaw;
+    dataPerturbed;
+    constructor(arr) { this.dataRaw = arr }
 
 
 

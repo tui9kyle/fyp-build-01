@@ -7,19 +7,18 @@
 }
 
 body {
-  background-color: red;
-  color: yellow;
+  background-color: #000;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 98vh;
   width: 100%;
 }
 
 .app {
   margin: 2rem;
   padding: 2rem;
-  border: 0.5rem solid yellow;
+  border: 0.5rem solid #fff;
   box-sizing: border-box;
 }
 
@@ -52,8 +51,23 @@ p {
 }
 
 input {
-  background-color: yellow;
-  color: red;
+  background-color: #fff;
+  color: #000;
   font-size: 1.5rem;
   padding: 1rem;
+}
+
+.row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+th {
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+td {
+  text-align: center;
 }

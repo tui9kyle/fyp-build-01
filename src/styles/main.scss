@@ -7,23 +7,16 @@ $color-text: #fff;
 $color-primary: #fff;
 $color-danger: red;
 
-
-
-
-$color-foreground: yellow;
-$color-background: red;
-$color-text: yellow;
-$color-primary: yellow;
-
+// $color-foreground: yellow;
+// $color-background: red;
+// $color-text: yellow;
+// $color-primary: yellow;
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-
-
-
-#root{
+#root {
   width: 100%;
 }
 
@@ -33,13 +26,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 98vh;
   width: 100%;
 }
 
 .app {
-
-
   margin: 2rem;
   padding: 2rem;
   border: 0.5rem solid $color-primary;
@@ -69,12 +59,24 @@ p {
   font-family: $font-sans;
 }
 
-
 input {
   background-color: $color-primary;
-  color:$color-background;
+  color: $color-background;
   font-size: 1.5rem;
-    padding: 1rem;
+  padding: 1rem;
 }
 
+.row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 
+th {
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+td {
+  text-align: center;
+}

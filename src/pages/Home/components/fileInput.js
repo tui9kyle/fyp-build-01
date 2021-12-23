@@ -7,13 +7,13 @@ import '../../../styles/main.css';
 
 
 
-var tldp;
+var tldpdata;
 
 
 
-const FileInput = () => {
+const FileInput = ({ setTldp }) => {
 
-    const [datafile, setDatafile] = useState();
+
 
 
     async function getFile(e) {
@@ -24,10 +24,8 @@ const FileInput = () => {
         reader.readAsText(file);
         reader.onload = () => {
             var r = reader.result;
-
             var arr = r.split("\n");
-            tldp = new TLDP(arr);
-            console.log(tldp)
+            setTldp(new TLDP(arr));
         }
     }
 
