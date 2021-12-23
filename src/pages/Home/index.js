@@ -1,62 +1,30 @@
-import { useState, useEffect } from 'react'
-
-import FileInput from './components/fileInput'
-import DataList from './components/dataList';
+import { useState, useEffect } from "react";
 
 
-import '../../styles/main.css';
+import "../../styles/main.css";
+
+import FileInput from "./components/fileInput";
+import DataList from "./components/dataList";
+import TldpOptions from "./components/tldpOptions";
 
 
 
 const Home = () => {
-
-
-
-
-
-
-
     const [tldp, setTldp] = useState();
 
+    useEffect(() => { }, [tldp]);
 
+    return (
+        <div className="app">
+            <h1 className="font-sans">
+                Local Differential Privacy in the Temporal Setting
+            </h1>
 
-
-    // useEffect(() => {
-    //     console.log(tldp)
-    // }, [tldp])
-
-
-
-
-    useEffect(() => {
-
-
-
-    }, [tldp])
-
-
-
-    
-
-    return <div className="app">
-
-
-<h1 className="font-sans">
-Local Differential Privacy in the Temporal Setting
-</h1>
-
-
-        <FileInput setTldp={setTldp} />
-
-
-
-        <DataList tldp={tldp} />
-
-
-
-
-    </div>
-
-}
+            <FileInput setTldp={setTldp} />
+            <TldpOptions />
+            <DataList tldp={tldp} />
+        </div>
+    );
+};
 
 export default Home;

@@ -13,7 +13,7 @@ const DataList = ({ tldp }) => {
 
     return (
         <div className="row">
-            <h3>Data</h3>
+            <h3 className="font-sans">Data</h3>
 
             <table>
                 <tr>

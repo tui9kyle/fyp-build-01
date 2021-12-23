@@ -7,9 +7,6 @@ import '../../../styles/main.css';
 
 
 
-var tldpdata;
-
-
 
 const FileInput = ({ setTldp }) => {
 

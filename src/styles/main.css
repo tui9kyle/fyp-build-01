@@ -53,7 +53,7 @@ p {
 input {
   background-color: #fff;
   color: #000;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 1rem;
   font-family: "Fira Code", "Source Code Pro", monospace;
 }
@@ -73,6 +73,11 @@ td {
   text-align: center;
 }
 
+label {
+  font-size: 1rem;
+  padding-right: 0.3rem;
+}
+
 .font-mono {
   font-family: "Fira Code", "Source Code Pro", monospace;
 }
@@ -83,4 +88,20 @@ td {
 
 .font-sans {
   font-family: "Source Sans Pro", sans-serif;
+}
+
+.font-2 {
+  font-size: 2em;
+}
+
+.font-75 {
+  font-size: 0.75em;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.padding-75 {
+  padding: 0.75rem;
 }

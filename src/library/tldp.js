@@ -30,9 +30,11 @@ export class TLDP {
 
 
     // Backward Perturbation Mechanism
-    BackwardPerturbationMechanism(d) {
+    BackwardPerturbationMechanism(arr) {
 
         // array d
+        var newArr;
+
 
 
     }
