@@ -55,6 +55,7 @@ input {
   color: #000;
   font-size: 1.5rem;
   padding: 1rem;
+  font-family: "Fira Code", "Source Code Pro", monospace;
 }
 
 .row {
@@ -70,4 +71,16 @@ th {
 
 td {
   text-align: center;
+}
+
+.font-mono {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+.font-serif {
+  font-family: "Source Serif Pro", serif;
+}
+
+.font-sans {
+  font-family: "Source Sans Pro", sans-serif;
 }

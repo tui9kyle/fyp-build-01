@@ -30,9 +30,6 @@ const FileInput = ({ setTldp }) => {
     }
 
     return <>
-        <h1>Datafile</h1>
-
-
 
         <input type="file" onChange={getFile} ></input>
 

@@ -1,57 +1,34 @@
-import { useState, useEffect } from 'react'
-import { TLDP } from '../../../library/tldp'
+import { useState, useEffect } from "react";
+import { TLDP } from "../../../library/tldp";
 
-
-import '../../../styles/main.css';
-
-
-
+import "../../../styles/main.css";
 
 const DataList = ({ tldp }) => {
-
-
-
-
-
-    var data = [""]
-
-
-
+    var data = [""];
 
     try {
-
-
-
         data = tldp.dataRaw;
         console.log(data);
+    } catch (error) { }
 
-    } catch (error) {
+    return (
+        <div className="row">
+            <h3>Data</h3>
 
-    }
+            <table>
+                <tr>
+                    <th>Original Data</th>
+                    <th>Perturbed Data</th>
+                </tr>
 
-
-    return <div className="row">
-
-
-        <h3>Data</h3>
-
-        <table>
-
-            <tr>
-                <th>Original Data</th>
-                <th>Perturbed Data</th>
-            </tr>
-
-            {data.map(d => <tr><td>{d}</td></tr>)}
-
-
-
-
-        </table>
-
-
-    </div>
-
-}
+                {data.map((d) => (
+                    <tr>
+                        <td className="font-mono">{d}</td>
+                    </tr>
+                ))}
+            </table>
+        </div>
+    );
+};
 
 export default DataList;

@@ -41,6 +41,10 @@ const Home = () => {
     return <div className="app">
 
 
+<h1 className="font-sans">
+Local Differential Privacy in the Temporal Setting
+</h1>
+
 
         <FileInput setTldp={setTldp} />
 
