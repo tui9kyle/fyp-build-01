@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { TLDP } from '../../../library/tldp'
+import { Tldp } from '../../../library/tldp'
 
 
 import '../../../styles/main.css';
@@ -22,7 +22,7 @@ const FileInput = ({ setTldp }) => {
         reader.onload = () => {
             var r = reader.result;
             var arr = r.split("\n");
-            setTldp(new TLDP(arr));
+            setTldp(new Tldp(arr));
         }
     }
 

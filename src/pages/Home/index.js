@@ -14,8 +14,10 @@ import TldpOptions from "./components/tldpOptions";
 
 const Home = () => {
     const [tldp, setTldp] = useState();
+    const [k, setK] = useState();
+    const [epsilon, setEpsilon] = useState();
+    const [mechanism, setMechanism] = useState();
 
-    useEffect(() => { }, [tldp]);
 
     return (
         <div className="app">
@@ -24,8 +26,8 @@ const Home = () => {
             </h1>
 
             <FileInput setTldp={setTldp} />
-            <TldpOptions tldp={tldp} setTldp={setTldp} />
-            <DataList tldp={tldp} />
+            <TldpOptions tldp={tldp} setK={setK} setEpsilon={setEpsilon} setMechanism={setMechanism}/>
+            <DataList tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism}/>
         </div>
     );
 };

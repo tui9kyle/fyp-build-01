@@ -3,7 +3,15 @@ import { TLDP } from "../../../library/tldp";
 
 import "../../../styles/main.css";
 
-const DataList = ({ tldp }) => {
+const DataList = ({ tldp, k, epsilon, mechanism }) => {
+
+
+    useEffect(() => {
+        
+    
+    }, [tldp, k])
+
+
     var data = [""];
 
     try {
@@ -12,7 +20,12 @@ const DataList = ({ tldp }) => {
     } catch (error) { }
 
     return (
+
+    
         <div className="row">
+
+
+            <p className="font-mono">{mechanism} k={k} ε={epsilon}</p>
             <h3 className="font-sans">Data</h3>
 
             <table>
