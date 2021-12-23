@@ -6,7 +6,7 @@
 
 class LDPUtilities {
 
-    PerturbationProbability(epsilon, k, j) {
+    static PerturbationProbability(epsilon, k, j) {
 
 
         if (j === 0) {
@@ -23,9 +23,9 @@ class LDPUtilities {
 
 export class Tldp {
 
-    static utilities = new LDPUtilities();
+
     dataRaw;
-    dataPerturbed;
+
 
     constructor(arr) { this.dataRaw = arr }
 
@@ -33,12 +33,32 @@ export class Tldp {
 
 
     // Backward Perturbation Mechanism
-    BackwardPerturbationMechanism(arr) {
+    BackwardPerturbationMechanism(k, epsilon) {
 
         // array d
-        var newArr;
+        var dataPerturbed = [];
+
+        // tbc
+        for (var i = 0; i < this.dataRaw.length; i++) {
+
+            var tmpK = k;
+            if (i < k - 1) tmpK = i + 1;
+
+            seed = Math.random();
+            idx = 0;
+            for (var j = 0; j < tmpK; ++j) {
+
+                idx += LDPUtilities.PerturbationProbability(epsilon, tmpK, j);
+
+            }
 
 
+
+        }
+
+
+
+        return dataPerturbed;
 
     }
 
@@ -46,5 +66,6 @@ export class Tldp {
 
 
 }
+
 
 
