@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import '../../library/tldp';
 
 import '../../styles/main.css';
 
 
 
 
-
+var tldp;
 
 
 
@@ -24,8 +25,8 @@ const Home = () => {
             var r = reader.result;
 
             var arr = r.split("\n");
-
-            console.log(arr)
+            tldp = new TLDPData(arr);
+            console.log(tldp)
         }
     }
 

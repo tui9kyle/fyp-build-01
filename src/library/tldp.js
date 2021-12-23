@@ -1,6 +1,15 @@
+
+
 // Local Differential Privacy in Temporal Setting
 
-class LDPUtilities {
+
+ class TLDPData {
+    static data;
+    constructor(data) { this.data = data }
+}
+
+
+ class LDPUtilities {
 
     PerturbationProbability(epsilon, k, j) {
 
@@ -16,16 +25,21 @@ class LDPUtilities {
 
 }
 
-class TLDP {
-
+export  default class TLDP {
+ 
+   static utilities =  new LDPUtilities();
+static data = new TLDPData();                                                                                                                                                                                                                                                                                                                                                                
 
     // Backward Perturbation Mechanism
     BackwardPerturbationMechanism(d) {
 
+        // array d
+
+    
     }
 
 
-    
+
 
 }
 
