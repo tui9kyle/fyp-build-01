@@ -44,12 +44,13 @@ export class Tldp {
             var tmpK = k;
             if (i < k - 1) tmpK = i + 1;
 
-            seed = Math.random();
-            idx = 0;
+            var seed = Math.random();
+            var idx = 0;
             for (var j = 0; j < tmpK; ++j) {
 
                 idx += LDPUtilities.PerturbationProbability(epsilon, tmpK, j);
-
+                if (!(idx < seed)) dataPerturbed[i] = this.dataRaw[i + j];
+                break;
             }
 
 
