@@ -9,6 +9,9 @@ import TldpOptions from "./components/tldpOptions";
 
 
 
+
+
+
 const Home = () => {
     const [tldp, setTldp] = useState();
 
@@ -21,7 +24,7 @@ const Home = () => {
             </h1>
 
             <FileInput setTldp={setTldp} />
-            <TldpOptions />
+            <TldpOptions tldp={tldp} setTldp={setTldp} />
             <DataList tldp={tldp} />
         </div>
     );

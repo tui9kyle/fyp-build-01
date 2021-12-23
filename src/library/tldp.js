@@ -25,6 +25,9 @@ export class TLDP {
     static utilities = new LDPUtilities();
     dataRaw;
     dataPerturbed;
+    k;
+    epsilon;
+
     constructor(arr) { this.dataRaw = arr }
 
 
