@@ -25,7 +25,7 @@ export class Tldp {
 
 
     dataRaw;
-
+    dataPerturbed;
 
     constructor(arr) { this.dataRaw = arr }
 
@@ -36,7 +36,7 @@ export class Tldp {
     BackwardPerturbationMechanism(k, epsilon) {
 
         // array d
-        var dataPerturbed = [];
+        this.dataPerturbed = [];
 
         // tbc
         for (var i = 0; i < this.dataRaw.length; i++) {
@@ -46,11 +46,14 @@ export class Tldp {
 
             var seed = Math.random();
             var idx = 0;
-            for (var j = 0; j < tmpK; ++j) {
-
+            for (var j = 0; j <= tmpK; j++) {
+                console.log(j, seed);
                 idx += LDPUtilities.PerturbationProbability(epsilon, tmpK, j);
-                if (!(idx < seed)) dataPerturbed[i] = this.dataRaw[i + j];
-                break;
+                if (idx >= seed) {
+                    this.dataPerturbed[i] = this.dataRaw[i + j];
+                    break;
+                }
+
             }
 
 
@@ -59,7 +62,7 @@ export class Tldp {
 
 
 
-        return dataPerturbed;
+        return this.dataPerturbed;
 
     }
 

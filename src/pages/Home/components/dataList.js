@@ -5,11 +5,12 @@ import "../../../styles/main.css";
 
 const DataList = ({ tldp, k, epsilon, mechanism }) => {
 
+    var dataPerturbed = [];
 
     useEffect(() => {
-        
-    
-    }, [tldp, k])
+
+
+    }, [tldp, k, epsilon])
 
 
     var data = [""];
@@ -17,11 +18,12 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
     try {
         data = tldp.dataRaw;
         console.log(data);
+        dataPerturbed = tldp.BackwardPerturbationMechanism(k, epsilon);
     } catch (error) { }
 
     return (
 
-    
+
         <div className="row">
 
 
@@ -30,13 +32,16 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
 
             <table>
                 <tr>
+                    <th></th>
                     <th>Original Data</th>
                     <th>Perturbed Data</th>
                 </tr>
 
-                {data.map((d) => (
+                {data.map((d, idx) => (
                     <tr>
+                         <td className="font-mono">{idx}</td>
                         <td className="font-mono">{d}</td>
+                        <td className="font-mono">{dataPerturbed[idx]}</td>
                     </tr>
                 ))}
             </table>
