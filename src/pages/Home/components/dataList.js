@@ -42,7 +42,7 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
                     <thead>
 
                         <tr>
-                            <th></th>
+                            <th>S</th>
                             <th className="px-3">Original Data</th>
                             <th className="px-3">Perturbed Data</th>
                             <th className="px-3">P</th>
