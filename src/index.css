@@ -22,8 +22,8 @@
   }
   
   .app {
-    margin: 2rem;
-    padding: 2rem;
-    border: 0.5rem solid #fff;
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.25);
     box-sizing: border-box;
   }

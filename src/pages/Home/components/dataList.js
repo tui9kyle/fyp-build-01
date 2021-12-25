@@ -11,10 +11,11 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
     useEffect(() => { }, [tldp, k, epsilon, mechanism])
 
 
-    if (mechanism == "BPM" && k > 0 && epsilon > 0) {
+    if (tldp != null && k > 0 && epsilon > 0) {
+        if (mechanism == "BPM") {
 
-
-        tldp.BackwardPerturbationMechanism(k, epsilon);
+            tldp.BackwardPerturbationMechanism(k, epsilon);
+        } else if (mechanism == "FPM") { tldp.ForwardPerturbationMechanism(k, epsilon); }
         data = tldp.dataRaw;
         dataPerturbed = tldp.dataPerturbed;
         probabilities = tldp.probabilities;
@@ -66,10 +67,10 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
                 </table>
             </div>
         );
+
     }
 
-
-    else return (<>nothing</>);
+    else return (<></>);
 };
 
 export default DataList;
