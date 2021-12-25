@@ -6,6 +6,7 @@ import "../../styles/main.css";
 import FileInput from "./components/fileInput";
 import DataList from "./components/dataList";
 import TldpOptions from "./components/tldpOptions";
+import DataChart from "./components/dataChart";
 
 
 
@@ -19,6 +20,8 @@ const Home = () => {
     const [mechanism, setMechanism] = useState();
 
 
+
+
     return (
         <div className="app">
             <h1 className="font-sans">
@@ -26,8 +29,9 @@ const Home = () => {
             </h1>
 
             <FileInput setTldp={setTldp} />
-            <TldpOptions tldp={tldp} setK={setK} setEpsilon={setEpsilon} setMechanism={setMechanism}/>
-            <DataList tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism}/>
+            <TldpOptions tldp={tldp} setK={setK} setEpsilon={setEpsilon} setMechanism={setMechanism} />
+            <DataChart tldp={tldp} k={k} epsilon={epsilon} />
+            <DataList tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism} />
         </div>
     );
 };

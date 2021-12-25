@@ -46,8 +46,8 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
                     <td>  <label className="">Mechanism</label></td>
                     <td>
 
-                        <select ref={mRef}>
-                            <option value="" selected="selected">--Please choose an option--</option>
+                        <select ref={mRef} defaultValue="">
+                            <option value="">--Please choose an option--</option>
                             <option value="BPM">Backward Perturbation Mechanism</option>
                             <option value="FPM">Forward Perturbation Mechanism</option>
 
