@@ -16,20 +16,22 @@ const DataChart = ({ tldp, k, epsilon }) => {
             labels: tldp.dataRaw,
             datasets: [
                 {
-                   
+
                     lineTension: 0,
-                    borderColor: "rgba(0,0,255,.5)",
+                    borderColor: "rgba(0,0,255,0.1)",
                     borderWidth: 1.5,
                     data: tldp.dataRaw,
-                    pointRadius: 0
+                    pointRadius: 1,
+                    pointBorderColor: "rgba(0,0,255,.5)",
                 },
                 {
 
                     lineTension: 0,
-                    borderColor: "rgba(255,255,0,.8)",
+                    borderColor: "rgba(255,255,0,0.1)",
                     borderWidth: 1.5,
                     data: tldp.BackwardPerturbationMechanism(k, epsilon),
-                    pointRadius: 0
+                    pointRadius: 1,
+                    pointBorderColor: "rgba(255,255,0,.8)",
 
                 },
             ],

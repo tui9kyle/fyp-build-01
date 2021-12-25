@@ -28,8 +28,7 @@ Development Stack
 
 - node.js
 - react: frontend framework
-- scss: for styling
-
+- scss, tailwind css: for styling
 
 ## TLDP Implementation
 
