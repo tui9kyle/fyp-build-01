@@ -50,6 +50,8 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
                                 <option value="BPM">Backward Perturbation Mechanism</option>
                                 <option value="FPM">Forward Perturbation Mechanism</option>
 
+                                <option value="TM">Threshold Mechanism</option>
+
                             </select>
 
                         </td>

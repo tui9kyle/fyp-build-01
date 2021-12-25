@@ -9,14 +9,14 @@ import { useState, useEffect } from "react";
 const DataChart = ({ tldp, k, epsilon, mechanism }) => {
     useEffect(() => {
 
-    }, [tldp,  k, epsilon, mechanism])
+    }, [tldp, k, epsilon, mechanism])
 
 
     var data;
 
     try {
         data = {
-            labels: tldp.dataRaw,
+            labels: tldp.dataPerturbed,
             datasets: [
                 {
 
@@ -24,8 +24,9 @@ const DataChart = ({ tldp, k, epsilon, mechanism }) => {
                     borderColor: "rgba(0,0,255,0.1)",
                     borderWidth: 1.5,
                     data: tldp.dataRaw,
-                    pointRadius: 1,
-                    pointBorderColor: "rgba(0,0,255,.5)",
+                    pointRadius: 2,
+                    pointBackgroundColor: "rgba(0,0,255,1)",
+                    pointBorderColor: "rgba(0,0,255,1)",
                 },
                 {
 
@@ -33,8 +34,9 @@ const DataChart = ({ tldp, k, epsilon, mechanism }) => {
                     borderColor: "rgba(255,255,0,0.1)",
                     borderWidth: 1.5,
                     data: tldp.dataPerturbed,
-                    pointRadius: 1,
-                    pointBorderColor: "rgba(255,255,0,.8)",
+                    pointRadius: 2,
+                    pointBackgroundColor: "rgba(255,255,0,1)",
+                    pointBorderColor: "rgba(255,255,0,1)",
 
                 },
             ],
