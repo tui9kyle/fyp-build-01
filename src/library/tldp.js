@@ -63,7 +63,7 @@ export class Tldp {
             for (var j = 0; j <= k; j++) {
                 idx += TldpUtilities.PerturbationProbability(epsilon, k, j);
 
-                if (idx <= seed) {
+                if (idx >= seed) {
 
                     this.dataPerturbed[i + j] = this.dataRaw[i];
 
