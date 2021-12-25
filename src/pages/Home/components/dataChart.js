@@ -5,14 +5,17 @@ import { useState, useEffect } from "react";
 
 
 
-const DataChart = ({ tldp, k, epsilon }) => {
+
+const DataChart = ({ tldp, k, epsilon, mechanism }) => {
     useEffect(() => {
 
-    }, [tldp])
+    }, [tldp,  k, epsilon, mechanism])
 
-    // if (tldp != null)
+
+    var data;
+
     try {
-        var data = {
+        data = {
             labels: tldp.dataRaw,
             datasets: [
                 {
@@ -24,16 +27,16 @@ const DataChart = ({ tldp, k, epsilon }) => {
                     pointRadius: 1,
                     pointBorderColor: "rgba(0,0,255,.5)",
                 },
-                // {
+                {
 
-                //     lineTension: 0,
-                //     borderColor: "rgba(255,255,0,0.1)",
-                //     borderWidth: 1.5,
-                //     data: tldp.BackwardPerturbationMechanism(k, epsilon),
-                //     pointRadius: 1,
-                //     pointBorderColor: "rgba(255,255,0,.8)",
+                    lineTension: 0,
+                    borderColor: "rgba(255,255,0,0.1)",
+                    borderWidth: 1.5,
+                    data: tldp.dataPerturbed,
+                    pointRadius: 1,
+                    pointBorderColor: "rgba(255,255,0,.8)",
 
-                // },
+                },
             ],
         };
 
