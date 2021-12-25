@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 
 import { useState, useEffect } from "react";
 
-import "../../../styles/main.css";
+
 
 const DataChart = ({ tldp, k, epsilon }) => {
     useEffect(() => {
@@ -24,16 +24,16 @@ const DataChart = ({ tldp, k, epsilon }) => {
                     pointRadius: 1,
                     pointBorderColor: "rgba(0,0,255,.5)",
                 },
-                {
+                // {
 
-                    lineTension: 0,
-                    borderColor: "rgba(255,255,0,0.1)",
-                    borderWidth: 1.5,
-                    data: tldp.BackwardPerturbationMechanism(k, epsilon),
-                    pointRadius: 1,
-                    pointBorderColor: "rgba(255,255,0,.8)",
+                //     lineTension: 0,
+                //     borderColor: "rgba(255,255,0,0.1)",
+                //     borderWidth: 1.5,
+                //     data: tldp.BackwardPerturbationMechanism(k, epsilon),
+                //     pointRadius: 1,
+                //     pointBorderColor: "rgba(255,255,0,.8)",
 
-                },
+                // },
             ],
         };
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Tldp } from '../../../library/tldp'
 
 
-import '../../../styles/main.css';
 
 
 
@@ -28,7 +27,8 @@ const FileInput = ({ setTldp }) => {
 
     return <>
 
-        <input type="file" onChange={getFile} ></input>
+        <input type="file" onChange={getFile} className="form-input
+  " ></input>
 
 
     </>

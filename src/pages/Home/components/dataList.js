@@ -1,58 +1,75 @@
 import { useState, useEffect } from "react";
-import { TLDP } from "../../../library/tldp";
+import { TldpUtilities } from "../../../library/tldp";
 
-import "../../../styles/main.css";
+
+
 
 const DataList = ({ tldp, k, epsilon, mechanism }) => {
-
+    var data = [];
     var dataPerturbed = [];
-
-    useEffect(() => {
-
-
-    }, [tldp, k, epsilon])
+    var probabilities = [];
+    useEffect(() => { }, [tldp, k, epsilon, mechanism])
 
 
-    var data = [""];
+    if (mechanism == "BPM" && k > 0 && epsilon > 0) {
 
-    try {
+
+        tldp.BackwardPerturbationMechanism(k, epsilon);
         data = tldp.dataRaw;
-        console.log(data);
-        dataPerturbed = tldp.BackwardPerturbationMechanism(k, epsilon);
-    } catch (error) { }
+        dataPerturbed = tldp.dataPerturbed;
+        probabilities = tldp.probabilities;
+        return (
+
+
+            <div className="row">
+
+
+                <p className="font-mono ">{mechanism} k={k} ε={epsilon}</p>
+                <p className="font-mono">P(0) {TldpUtilities.PerturbationProbability(epsilon, k, 0)}</p>
+                <p className="font-mono">P(j) {TldpUtilities.PerturbationProbability(epsilon, k, 1)}</p>
 
 
 
 
-    return (
 
 
-        <div className="row">
+                <h3 className="font-sans">Data</h3>
+
+                <table>
 
 
-            <p className="font-mono">{mechanism} k={k} ε={epsilon}</p>
-            <h3 className="font-sans">Data</h3>
+                    <thead>
 
-            <table>
-                <tr>
-                    <th></th>
-                    <th>Original Data</th>
-                    <th>Perturbed Data</th>
-                </tr>
-
-                {
-
-
-                    dataPerturbed.map((d, idx) => (
                         <tr>
-                            <td className="font-mono">{idx}</td>
-                            <td className="font-mono">{data[idx]}</td>
-                            <td className="font-mono">{d}</td>
+                            <th></th>
+                            <th>Original Data</th>
+                            <th>Perturbed Data</th>
+                            <th>P</th>
                         </tr>
-                    ))}
-            </table>
-        </div>
-    );
+                    </thead>
+                    <tbody>
+
+                        {
+
+
+                            dataPerturbed.map((d, idx) => (
+                                <tr>
+                                    <td className="font-mono">{idx}</td>
+                                    <td className="font-mono">{data[idx]}</td>
+                                    <td className="font-mono">{d}</td>
+                                    <td className="font-mono" >{probabilities[idx]}</td>
+                                </tr>
+                            ))}
+
+
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+
+    else return (<>nothing</>);
 };
 
 export default DataList;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 
-import "../../styles/main.css";
+
 
 import FileInput from "./components/fileInput";
 import DataList from "./components/dataList";
@@ -24,7 +24,7 @@ const Home = () => {
 
     return (
         <div className="app">
-            <h1 className="font-sans">
+            <h1 className="font-sans ">
                 Local Differential Privacy in the Temporal Setting
             </h1>
 

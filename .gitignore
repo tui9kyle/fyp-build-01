@@ -24,8 +24,3 @@ yarn-error.log*
 
 
 /.vscode
-
-
-# complied css
-*.css
-!index.css

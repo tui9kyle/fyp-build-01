@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Tldp, TldpConfig } from "../../../library/tldp";
 
-import "../../../styles/main.css";
 
 const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
 
@@ -40,43 +39,43 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
             <h4 className="font-sans">TLDP Options</h4>
 
             <table>
+                <tbody>
+                    <tr>
 
-                <tr>
+                        <td>  <label className="form-select">Mechanism</label></td>
+                        <td>
 
-                    <td>  <label className="">Mechanism</label></td>
-                    <td>
+                            <select ref={mRef} defaultValue="">
+                                <option value="">--Please choose an option--</option>
+                                <option value="BPM">Backward Perturbation Mechanism</option>
+                                <option value="FPM">Forward Perturbation Mechanism</option>
 
-                        <select ref={mRef} defaultValue="">
-                            <option value="">--Please choose an option--</option>
-                            <option value="BPM">Backward Perturbation Mechanism</option>
-                            <option value="FPM">Forward Perturbation Mechanism</option>
+                            </select>
 
-                        </select>
+                        </td>
 
-                    </td>
+                    </tr>
+                    <tr>
 
-                </tr>
-                <tr>
+                        <td>  <label className="font-mono">&epsilon;</label></td>
+                        <td>        <input ref={eRef} className="" type="number" min="0" step="0.01" /></td>
 
-                    <td>  <label className="font-2">&epsilon;</label></td>
-                    <td>        <input ref={eRef} className="padding-75" type="number" min="0" step="0.01" /></td>
+                    </tr>
+                    <tr>
 
-                </tr>
-                <tr>
+                        <td>  <label className="font-mono">k</label></td>
+                        <td>        <input ref={kRef} className="" type="number" min="1" step="1" /></td>
 
-                    <td>  <label className="font-2">k</label></td>
-                    <td>        <input ref={kRef} className="padding-75" type="number" min="1" step="1" /></td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <td colSpan="2">
 
-                    <td colSpan="2">
-
-                        <button onClick={valueHandler} className="font-mono font-1 padding-75">Set</button>
-                    </td>
-                </tr>
-
+                            <button onClick={valueHandler} className="font-mono">Set</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
 
