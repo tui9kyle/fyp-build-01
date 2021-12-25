@@ -21,6 +21,9 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
         dataPerturbed = tldp.BackwardPerturbationMechanism(k, epsilon);
     } catch (error) { }
 
+
+
+
     return (
 
 
@@ -37,13 +40,16 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
                     <th>Perturbed Data</th>
                 </tr>
 
-                {data.map((d, idx) => (
-                    <tr>
-                         <td className="font-mono">{idx}</td>
-                        <td className="font-mono">{d}</td>
-                        <td className="font-mono">{dataPerturbed[idx]}</td>
-                    </tr>
-                ))}
+                {
+
+
+                    dataPerturbed.map((d, idx) => (
+                        <tr>
+                            <td className="font-mono">{idx}</td>
+                            <td className="font-mono">{data[idx]}</td>
+                            <td className="font-mono">{d}</td>
+                        </tr>
+                    ))}
             </table>
         </div>
     );
