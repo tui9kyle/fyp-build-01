@@ -28,3 +28,4 @@ yarn-error.log*
 
 # complied css
 *.css
+!index.css

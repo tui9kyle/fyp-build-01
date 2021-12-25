@@ -35,10 +35,10 @@ export class Tldp {
     // Backward Perturbation Mechanism
     BackwardPerturbationMechanism(k, epsilon) {
 
-        // array d
+
         this.dataPerturbed = [];
 
-        // tbc
+
         for (var i = 0; i < this.dataRaw.length; i++) {
 
             var tmpK = k;
@@ -52,6 +52,40 @@ export class Tldp {
                 if (idx >= seed) {
                     this.dataPerturbed[i] = this.dataRaw[i + j];
                     break;
+                }
+
+            }
+
+
+
+        }
+
+
+
+        return this.dataPerturbed;
+
+    }
+
+
+
+    // Forward Perturbation Mechanism
+    ForwardPerturbationMechanism(k, epsilon) {
+
+        // array d
+        this.dataPerturbed = [];
+
+        // tbc
+        for (var i = 0; i < this.dataRaw.length; i++) {
+
+           
+            var seed = Math.random();
+            var idx = 0;
+            for (var j = 0; j <= k; j++) {
+                console.log(j, seed);
+                idx += LDPUtilities.PerturbationProbability(epsilon, k, j);
+                if (idx >= seed) {
+                    this.dataPerturbed[i] = this.dataRaw[i + j];
+                    break; 
                 }
 
             }
