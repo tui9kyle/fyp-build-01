@@ -42,10 +42,10 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
                 <tbody>
                     <tr>
 
-                        <td>  <label className="form-select">Mechanism</label></td>
+                        <td>  <label>Mechanism</label></td>
                         <td>
 
-                            <select ref={mRef} defaultValue="">
+                            <select ref={mRef} defaultValue="" className="form-select rounded bg-background">
                                 <option value="">--Please choose an option--</option>
                                 <option value="BPM">Backward Perturbation Mechanism</option>
                                 <option value="FPM">Forward Perturbation Mechanism</option>
@@ -58,13 +58,13 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
                     <tr>
 
                         <td>  <label className="font-mono">&epsilon;</label></td>
-                        <td>        <input ref={eRef} className="" type="number" min="0" step="0.01" /></td>
+                        <td>        <input ref={eRef} className="form-input rounded bg-background text-foreground" type="number" min="0" step="0.01" /></td>
 
                     </tr>
                     <tr>
 
                         <td>  <label className="font-mono">k</label></td>
-                        <td>        <input ref={kRef} className="" type="number" min="1" step="1" /></td>
+                        <td>        <input ref={kRef} className="form-input rounded bg-background text-foreground s" type="number" min="1" step="1" /></td>
 
                     </tr>
 
@@ -72,7 +72,21 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
 
                         <td colSpan="2">
 
-                            <button onClick={valueHandler} className="font-mono">Set</button>
+                            <button onClick={valueHandler} className="font-mono  text-gray-100
+                            
+                            
+                            block 
+bg-gray-900 
+    
+        my-5 mr-4 py-2 px-5
+        rounded-full border-0
+
+       hover:bg-gray-600
+                            
+                            
+                            
+                            
+                            ">Set</button>
                         </td>
                     </tr>
                 </tbody>

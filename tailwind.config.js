@@ -4,9 +4,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        mono: ['Fira Code', 'Source Code Pro', 'monospace']
-      },
+
       colors: {
 
 
@@ -18,6 +16,7 @@ module.exports = {
     fontFamily: {
       sans: ['Source Sans Pro', 'sans-serif'],
       serif: ['Source Serif Pro', 'serif'],
+      mono: ['Fira Code', 'Source Code Pro', 'monospace']
 
     },
 

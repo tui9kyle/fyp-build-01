@@ -42,9 +42,9 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
 
                         <tr>
                             <th></th>
-                            <th>Original Data</th>
-                            <th>Perturbed Data</th>
-                            <th>P</th>
+                            <th className="px-3">Original Data</th>
+                            <th className="px-3">Perturbed Data</th>
+                            <th className="px-3">P</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,9 +54,9 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
 
                             dataPerturbed.map((d, idx) => (
                                 <tr>
-                                    <td className="font-mono">{idx}</td>
-                                    <td className="font-mono">{data[idx]}</td>
-                                    <td className="font-mono">{d}</td>
+                                    <td className="font-mono text-center">{idx}</td>
+                                    <td className="font-mono text-center">{data[idx]}</td>
+                                    <td className="font-mono text-center">{d}</td>
                                     <td className="font-mono" >{probabilities[idx]}</td>
                                 </tr>
                             ))}

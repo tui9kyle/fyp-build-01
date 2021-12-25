@@ -27,7 +27,15 @@ const FileInput = ({ setTldp }) => {
 
     return <>
 
-        <input type="file" onChange={getFile} className="form-input
+        <input type="file" onChange={getFile}
+            className="block text-gray-400 font-mono
+             file:bg-gray-900 file:text-gray-100
+         w-full 
+         file:my-5 file:mr-4 file:py-2 file:px-5
+         file:rounded-full file:border-0
+
+       hover:file:bg-gray-600
+        
   " ></input>
 
 

@@ -24,7 +24,7 @@ const Home = () => {
 
     return (
         <div className="app">
-            <h1 className="font-sans ">
+            <h1 className="font-sans text-2xl">
                 Local Differential Privacy in the Temporal Setting
             </h1>
 
