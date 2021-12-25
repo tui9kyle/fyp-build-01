@@ -32,7 +32,7 @@ export class Tldp {
             if (i < k - 1) tmpK = i + 1;
 
             var seed = Math.random();
-
+            this.probabilities[i] = seed;
             var idx = 1;
 
             TldpUtilities.PerturbationProbabilityValues(epsilon, tmpK);
