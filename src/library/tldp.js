@@ -26,7 +26,7 @@ export class Tldp {
     // Backward Perturbation Mechanism
     BackwardPerturbationMechanism(k, epsilon) {
         this.dataPerturbed = [];
-
+        this.probabilities = [];
         for (var i = 0; i < this.dataRaw.length; i++) {
             var tmpK = k;
             if (i < k - 1) tmpK = i + 1;
