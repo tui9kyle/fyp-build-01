@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Home from './pages/Home';
 
 
-import "./index.css"
+import "./index-light.css"
 
 ReactDOM.render(
   <React.StrictMode>

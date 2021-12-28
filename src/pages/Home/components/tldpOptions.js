@@ -45,7 +45,7 @@ const TldpOptions = ({ tldp, setK, setEpsilon, setMechanism }) => {
                         <td>  <label>Mechanism</label></td>
                         <td>
 
-                            <select ref={mRef} defaultValue="" className="form-select rounded bg-background">
+                            <select ref={mRef} defaultValue="" className="form-select rounded bg-background text-foreground">
                                 <option value="">--Please choose an option--</option>
                                 <option value="BPM">Backward Perturbation Mechanism</option>
                                 <option value="FPM">Forward Perturbation Mechanism</option>
