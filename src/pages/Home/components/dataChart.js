@@ -21,51 +21,57 @@ const DataChart = ({ tldp, k, epsilon, mechanism }) => {
                 {
 
                     lineTension: 0,
-                    borderColor: "rgba(0,0,255,0.1)",
+                    borderColor: "rgba(255,0,0,0.1)",
                     borderWidth: 1.5,
-                    data: tldp.dataRaw,
-                    pointRadius: 2,
-                    pointBackgroundColor: "rgba(0,0,255,1)",
-                    pointBorderColor: "rgba(0,0,255,1)",
+                    data: tldp.dataPerturbed,
+                    pointRadius: 1,
+                    pointBackgroundColor: "rgba(255,0,0,1)",
+                    pointBorderColor: "rgba(255,0,0,1)",
+
                 },
                 {
 
                     lineTension: 0,
-                    borderColor: "rgba(255,255,0,0.1)",
+                    borderColor: "rgba(0,0,255,0.1)",
                     borderWidth: 1.5,
-                    data: tldp.dataPerturbed,
-                    pointRadius: 2,
-                    pointBackgroundColor: "rgba(255,255,0,1)",
-                    pointBorderColor: "rgba(255,255,0,1)",
-
+                    data: tldp.dataRaw,
+                    pointRadius: 1,
+                    pointBackgroundColor: "rgba(0,0,255,1)",
+                    pointBorderColor: "rgba(0,0,255,1)",
                 },
+
             ],
         };
 
         return (
-            <Line
-                data={data}
-                options={{
-                    title: {
-                        display: false,
-                    },
+            <div>
+                <Line
+                    height={250}
 
-                    scales: {
-                        xAxis: {
+                    data={data}
+                    options={{
+                        maintainAspectRatio: false,
+                        title: {
                             display: false,
                         },
-                    },
-                    events: [],
-                    plugins: {
-                        legend: {
-                            display: false,
+
+                        scales: {
+                            xAxis: {
+                                display: false,
+                            },
                         },
-                        tooltip: {
-                            display: false,
+                        events: [],
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            tooltip: {
+                                display: false,
+                            },
                         },
-                    },
-                }}
-            />
+                    }}
+                />
+            </div>
         );
 
     }

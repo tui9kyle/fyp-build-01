@@ -43,9 +43,9 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
 
                         <tr>
                             <th>S</th>
-                            <th className="px-3">Original Data</th>
-                            <th className="px-3">Perturbed Data</th>
-                            <th className="px-3">P</th>
+                            <th className="px-3 text-blue-500">Original Data</th>
+                            <th className="px-3 text-red-500">Perturbed Data</th>
+                            {/* <th className="px-3">P</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@ const DataList = ({ tldp, k, epsilon, mechanism }) => {
                                     <td className="font-mono text-center">{idx}</td>
                                     <td className="font-mono text-center">{data[idx]}</td>
                                     <td className="font-mono text-center">{d}</td>
-                                    <td className="font-mono" >{probabilities[idx]}</td>
+                                    {/* <td className="font-mono" >{probabilities[idx]}</td> */}
                                 </tr>
                             ))}
 

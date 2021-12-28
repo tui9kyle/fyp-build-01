@@ -30,7 +30,7 @@ const Home = () => {
 
             <FileInput setTldp={setTldp} />
             <TldpOptions tldp={tldp} setK={setK} setEpsilon={setEpsilon} setMechanism={setMechanism} />
-            {/* <DataChart tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism} /> */}
+            <DataChart tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism} />
             <DataList tldp={tldp} k={k} epsilon={epsilon} mechanism={mechanism} />
         </div>
     );
