@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  #root {
+    width: 100%;
+  }
+  
+  body {
+    background-color: rgb(250, 250, 250);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .app {
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 0.2rem solid rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+  }
