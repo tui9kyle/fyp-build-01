@@ -13,7 +13,6 @@ export class DpUtilities {
 
 export class Dp {
     // Laplace mechanism
-
     static LaplaceMechanism(data, sensitivity, epsilon) {
         var dataPerturbed = [];
         var debugArr = [];
