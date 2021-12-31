@@ -12,10 +12,11 @@ const SelectMechanism = ({ mechanism, setMechanism }) => {
                     className='form-select rounded bg-background text-foreground'
                 >
                     <option value=''>--Please choose an option--</option>
-                    <option value='BPM'>Backward Perturbation Mechanism</option>
-                    <option value='FPM'>Forward Perturbation Mechanism</option>
+                    <option value='t_BPM'>Backward Perturbation Mechanism</option>
+                    <option value='t_FPM'>Forward Perturbation Mechanism</option>
 
-                    <option value='TM'>Threshold Mechanism</option>
+                    <option value='t_TM'>Threshold Mechanism</option>
+                    <option value='v_LM'>Laplace Mechanism</option>
                 </select>
             </div>
         </div>

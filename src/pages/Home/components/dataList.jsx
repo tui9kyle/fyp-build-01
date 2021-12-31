@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { TldpUtilities } from "../../../library/tldp";
 
-const DataList = ({ data, tldpOptions }) => {
-    useEffect(() => {}, [data]);
+const DataList = ({ data, ldpOptions }) => {
+    useEffect(() => {}, [data, ldpOptions]);
 
-    if (data != null && tldpOptions != null) {
+    if (data != null && ldpOptions != null) {
         return (
             <div className='row'>
-                <p className='font-mono '>
+                {/* <p className='font-mono '>
                     {tldpOptions.mechanism} k={tldpOptions.k} ε=
                     {tldpOptions.epsilon}
                 </p>
@@ -26,7 +25,7 @@ const DataList = ({ data, tldpOptions }) => {
                         tldpOptions.k,
                         1
                     )}
-                </p>
+                </p> */}
 
                 <h3 className='font-sans'>Data</h3>
 

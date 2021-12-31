@@ -43,6 +43,8 @@ const DataChart = ({ data }) => {
 
         if (chartRef.current != null)
             chartRef.current.resize(chartWidth, chartHeight);
+        var test = data["dataPerturbed"]["result"];
+
         return (
             <div className='overflow-x-scroll'>
                 <Line
@@ -58,6 +60,15 @@ const DataChart = ({ data }) => {
                         },
 
                         scales: {
+                            y: {
+                                suggestedMin: Math.min(
+                                    ...data["dataPerturbed"]["result"]
+                                ),
+                                suggestedMax: Math.max(
+                                    ...data["dataPerturbed"]["result"]
+                                ),
+                            },
+
                             xAxis: {
                                 // display: false,
                             },

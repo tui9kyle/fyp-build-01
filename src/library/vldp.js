@@ -1,6 +1,6 @@
 // Differential Privacy
 
-export class DpUtilities {
+export class VldpUtilities {
     static Laplace(mu, b) {
         function sgn(x) {
             return x < 0 ? -1 : 1;
@@ -9,17 +9,23 @@ export class DpUtilities {
         var U = Math.random() - 0.5;
         return mu - b * sgn(U) * Math.log(1 - 2 * Math.abs(U));
     }
+    static LaplaceNoise(epsilon) {
+
+return(VldpUtilities.Laplace(0.0, 1/epsilon));
+
+    }
 }
 
-export class Dp {
+export class Vldp {
     // Laplace mechanism
-    static LaplaceMechanism(data, sensitivity, epsilon) {
+    static LaplaceMechanism(data, epsilon) {
         var dataPerturbed = [];
         var debugArr = [];
         for (var i = 0; i < data.length; i++) {
-            debugArr[i] = DpUtilities.Laplace(0.0, sensitivity / epsilon);
-            dataPerturbed[i] =
-                data[i] + DpUtilities.Laplace(0.0, sensitivity / epsilon);
+            let noise = VldpUtilities.LaplaceNoise(epsilon)
+            debugArr[i] = noise;
+            dataPerturbed[i] = data[i] + noise;
+
         }
 
         return { result: dataPerturbed, debugArr };

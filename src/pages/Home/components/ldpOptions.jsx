@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Tldp } from "../../../library/tldp";
-import ButtonSet from "./tldpOptions/buttonSet";
-import InputNumber from "./tldpOptions/inputNumber";
-import SelectMechanism from "./tldpOptions/selectMechanism";
+import { Vldp } from "../../../library/vldp";
+import ButtonSet from "./ldpOptions/buttonSet";
+import InputNumber from "./ldpOptions/inputNumber";
+import SelectMechanism from "./ldpOptions/selectMechanism";
 
-const TldpOptions = ({ setTldpOptions, setDataPerturbed, dataRaw }) => {
+const LdpOptions = ({ setLdpOptions, setDataPerturbed, dataRaw }) => {
     const [mechanism, setMechanism] = useState("");
     const [epsilon, setEpsilon] = useState();
     const [k, setK] = useState();
@@ -14,19 +15,24 @@ const TldpOptions = ({ setTldpOptions, setDataPerturbed, dataRaw }) => {
     function ldpCompute() {
         var result;
 
-        if (mechanism == "BPM") {
+        if (mechanism == "t_BPM") {
             result = Tldp.BackwardPerturbationMechanism(dataRaw, k, epsilon);
-        } else if (mechanism == "FPM") {
+            setLdpOptions({ k, epsilon, mechanism });
+        } else if (mechanism == "t_FPM") {
             result = Tldp.ForwardPerturbationMechanism(dataRaw, k, epsilon);
+            setLdpOptions({ k, epsilon, mechanism });
+        } else if (mechanism == "v_LM") {
+            result = Vldp.LaplaceMechanism(dataRaw, epsilon);
+            setLdpOptions({ epsilon, mechanism });
         }
-        setTldpOptions({ k, epsilon, mechanism: mechanism });
+
         setDataPerturbed(result);
     }
 
-    if (mechanism == "BPM" || mechanism == "FPM") {
+    if (mechanism == "t_BPM" || mechanism == "t_FPM") {
         return (
             <div className='row'>
-                <h4 className='font-sans'>TLDP Options</h4>
+                <h4 className='font-sans'>LDP Mechanism Options</h4>
                 <SelectMechanism
                     mechanism={mechanism}
                     setMechanism={setMechanism}
@@ -48,10 +54,10 @@ const TldpOptions = ({ setTldpOptions, setDataPerturbed, dataRaw }) => {
                 <ButtonSet onClick={ldpCompute} />
             </div>
         );
-    } else if (mechanism == "TM") {
+    } else if (mechanism == "t_TM") {
         return (
             <div className='row'>
-                <h4 className='font-sans'>TLDP Options</h4>
+                <h4 className='font-sans'>LDP Mechanism Options</h4>
                 <SelectMechanism
                     mechanism={mechanism}
                     setMechanism={setMechanism}
@@ -74,10 +80,28 @@ const TldpOptions = ({ setTldpOptions, setDataPerturbed, dataRaw }) => {
                 <ButtonSet onClick={ldpCompute} />
             </div>
         );
+    } else if (mechanism == "v_LM") {
+        return (
+            <div className='row'>
+                <h4 className='font-sans'>LDP Mechanism Options</h4>
+                <SelectMechanism
+                    mechanism={mechanism}
+                    setMechanism={setMechanism}
+                />
+                <InputNumber
+                    labelName='&epsilon;'
+                    value={epsilon}
+                    setValue={setEpsilon}
+                    inputMin='0'
+                    inputStep='0.01'
+                />
+                <ButtonSet onClick={ldpCompute} />
+            </div>
+        );
     } else {
         return (
             <div className='row'>
-                <h4 className='font-sans'>TLDP Options</h4>
+                <h4 className='font-sans'>LDP Mechanism Options</h4>
                 <SelectMechanism
                     mechanism={mechanism}
                     setMechanism={setMechanism}
@@ -87,4 +111,4 @@ const TldpOptions = ({ setTldpOptions, setDataPerturbed, dataRaw }) => {
     }
 };
 
-export default TldpOptions;
+export default LdpOptions;

@@ -6,8 +6,13 @@ const FileInput = ({ setDataRaw }) => {
         reader.onload = () => {
             var r = reader.result;
             var arr = r.split("\n");
+            try {
+                var arr2 = arr.map((v) => parseFloat(v));
 
-            setDataRaw(arr);
+                setDataRaw(arr2);
+            } catch {
+                setDataRaw(arr);
+            }
         };
     }
 
@@ -23,7 +28,8 @@ const FileInput = ({ setDataRaw }) => {
 
        hover:file:bg-gray-600
         
-  '></input>
+  '
+            ></input>
         </>
     );
 };
