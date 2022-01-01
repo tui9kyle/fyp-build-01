@@ -72,8 +72,9 @@ export class Tldp {
         let x = Array(data.length).fill(0);
 
         for (let i = 0; i < data.length; i++) {
-            // ! logic error: c should count i to i+k-1
-            let c = x.filter((v) => v == 0).length;
+            // ? fixing... logic error: c should count i to i+k-1
+            let c = x.slice(i, i + k).filter((v) => v == 0).length;
+
             if (c > c0) {
                 // Randomly select an index l from X = {j|x_j = 0, i ≤ j ≤ i+k−1}
                 let p = Math.random();
