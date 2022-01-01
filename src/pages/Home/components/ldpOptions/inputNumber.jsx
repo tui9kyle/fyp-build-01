@@ -12,9 +12,10 @@ const InputNumber = ({ labelName, value, setValue, inputMin, inputStep }) => {
                     min={inputMin}
                     step={inputStep}
                     value={value}
-               onChange={(e) => {setValue(e.target.value)}}
-               
-               />
+                    onChange={(e) => {
+                        setValue(parseFloat(e.target.value));
+                    }}
+                />
             </div>
         </div>
     );

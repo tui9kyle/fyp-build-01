@@ -69,16 +69,22 @@ export class Tldp {
     // Threshold Mechanism
     static ThresholdMechanism(data, k, c0) {
         let dataPerturbed = [];
+        let debugArr = [];
         let x = Array(data.length).fill(0);
 
         for (let i = 0; i < data.length; i++) {
-            // ? fixing... logic error: c should count i to i+k-1
+            console.log("!!! ", i);
+            // ! fixing... logic error: c should count i to i+k-1
             let c = x.slice(i, i + k).filter((v) => v == 0).length;
-
+            console.log(c, " ", c0);
+            console.log(i, " ", i + k, " ", x.slice(i, i + k));
             if (c > c0) {
                 // Randomly select an index l from X = {j|x_j = 0, i ≤ j ≤ i+k−1}
+
                 let p = Math.random();
-                let idx = Math.floor(p / c);
+                var idx = Math.floor(p * c);
+                console.log("c > c0 ", idx);
+                debugArr[i] = p;
                 for (let j = 0; j <= idx; j++) {
                     if (x[i + j] != 0) {
                         idx++;
@@ -88,21 +94,26 @@ export class Tldp {
                 dataPerturbed[idx] = data[i];
                 x[idx] = 1;
             } else if (x[i] == 0) {
+                console.log("(x[i] == 0");
                 dataPerturbed[i] = data[i];
+                debugArr[i] = "x_i = 0";
                 x[i] = 1;
             } else {
+                console.log("else case");
                 let p = Math.random();
-                let idx = Math.floor(p / c);
+                debugArr[i] = p;
+                var idx = Math.floor(p / c);
                 for (let j = 0; j <= idx; j++) {
                     if (x[i + j] != 0) {
                         idx++;
                     }
                 }
+
                 dataPerturbed[idx] = data[i];
                 x[idx] = 1;
             }
         }
 
-        return { result: dataPerturbed };
+        return { result: dataPerturbed, debugArr };
     }
 }

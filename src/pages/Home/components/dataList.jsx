@@ -39,7 +39,7 @@ const DataList = ({ data, ldpOptions }) => {
                             <th className='px-3 text-red-500'>
                                 Perturbed Data
                             </th>
-                            <th className='px-3'>P</th>
+                            <th className='px-3 text-gray-400'>Debug</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@ const DataList = ({ data, ldpOptions }) => {
                                     {data["dataRaw"][idx]}
                                 </td>
                                 <td className='font-mono text-center'>{d}</td>
-                                <td className='font-mono'>
+                                <td className='font-mono text-gray-400'>
                                     {data["dataPerturbed"]["debugArr"][idx]}
                                 </td>
                             </tr>

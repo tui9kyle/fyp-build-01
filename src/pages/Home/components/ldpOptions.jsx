@@ -13,17 +13,32 @@ const LdpOptions = ({ setLdpOptions, setDataPerturbed, dataRaw }) => {
     useEffect(() => {}, [mechanism]);
 
     function ldpCompute() {
-        var result;
+        let result;
 
-        if (mechanism == "t_BPM") {
-            result = Tldp.BackwardPerturbationMechanism(dataRaw, k, epsilon);
-            setLdpOptions({ k, epsilon, mechanism });
-        } else if (mechanism == "t_FPM") {
-            result = Tldp.ForwardPerturbationMechanism(dataRaw, k, epsilon);
-            setLdpOptions({ k, epsilon, mechanism });
-        } else if (mechanism == "v_LM") {
-            result = Vldp.LaplaceMechanism(dataRaw, epsilon);
-            setLdpOptions({ epsilon, mechanism });
+        switch (mechanism) {
+            case "t_BPM":
+                result = Tldp.BackwardPerturbationMechanism(
+                    dataRaw,
+                    k,
+                    epsilon
+                );
+                setLdpOptions({ k, epsilon, mechanism });
+                break;
+
+            case "t_FPM":
+                result = Tldp.ForwardPerturbationMechanism(dataRaw, k, epsilon);
+                setLdpOptions({ k, epsilon, mechanism });
+                break;
+
+            case "t_TM":
+                result = Tldp.ThresholdMechanism(dataRaw, k, c0);
+                setLdpOptions({ k, c0, mechanism });
+                break;
+
+            case "v_LM":
+                result = Vldp.LaplaceMechanism(dataRaw, epsilon);
+                setLdpOptions({ epsilon, mechanism });
+                break;
         }
 
         setDataPerturbed(result);
