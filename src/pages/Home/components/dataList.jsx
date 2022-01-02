@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const DataList = ({ data, ldpOptions }) => {
     useEffect(() => {}, [data, ldpOptions]);
 
-    if (data != null && ldpOptions != null) {
+    if (data != null && ldpOptions[0] != null) {
         return (
             <div className='row'>
                 {/* <p className='font-mono '>
@@ -43,7 +43,7 @@ const DataList = ({ data, ldpOptions }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data["dataPerturbed"]["result"].map((d, idx) => (
+                        {data["dataPerturbed"][0]["result"].map((d, idx) => (
                             <tr>
                                 <td className='font-mono text-center'>{idx}</td>
                                 <td className='font-mono text-center'>
@@ -51,7 +51,7 @@ const DataList = ({ data, ldpOptions }) => {
                                 </td>
                                 <td className='font-mono text-center'>{d}</td>
                                 <td className='font-mono text-gray-400'>
-                                    {data["dataPerturbed"]["debugArr"][idx]}
+                                    {data["dataPerturbed"][0]["debugArr"][idx]}
                                 </td>
                             </tr>
                         ))}

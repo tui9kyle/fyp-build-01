@@ -2,41 +2,42 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 import { useState, useEffect, useRef } from "react";
+import CustomColor from "./ldpOptions/customColor";
 
 const DataChart = ({ data }) => {
     useEffect(() => {}, [data]);
     const chartRef = useRef(null);
     var chartData;
 
-    if (data["dataPerturbed"] != null) {
+    if (data["dataPerturbed"][0] != null) {
         chartData = {
-            labels: Array(data["dataPerturbed"]["result"].length).fill(""),
+            labels: Array(data["dataPerturbed"][0]["result"].length).fill(""),
             datasets: [
                 {
                     label: "Perturbed Data",
                     lineTension: 0,
-                    borderColor: "rgba(255,0,0,0.5)",
+                    borderColor: CustomColor.blue,
                     borderWidth: 0,
-                    data: data["dataPerturbed"]["result"], //perturbed
-                    pointRadius: 2,
-                    pointBackgroundColor: "rgba(255,0,0,1)",
-                    pointBorderColor: "rgba(255,0,0,1)",
+                    data: data["dataPerturbed"][0]["result"], //perturbed
+                    pointRadius: 3,
+                    pointBackgroundColor: CustomColor.blue,
+                    pointBorderColor: CustomColor.blue,
                 },
                 {
                     label: "Original Data",
                     lineTension: 0,
-                    borderColor: "rgba(0,0,255,0.5)",
+                    borderColor: CustomColor.dull,
                     borderWidth: 0,
                     data: data["dataRaw"], //raw
-                    pointRadius: 2,
-                    pointBackgroundColor: "rgba(0,0,255,1)",
-                    pointBorderColor: "rgba(0,0,255,1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: CustomColor.dull,
+                    pointBorderColor: CustomColor.dull,
                 },
             ],
         };
 
         var chartWidth =
-            data["dataPerturbed"]["result"].length * 8 > 1000
+            data["dataPerturbed"][0]["result"].length * 8 > 1000
                 ? data["dataPerturbed"]["result"].length * 8
                 : 1000;
         var chartHeight = 250;
@@ -62,10 +63,10 @@ const DataChart = ({ data }) => {
                         scales: {
                             y: {
                                 suggestedMin: Math.min(
-                                    ...data["dataPerturbed"]["result"]
+                                    ...data["dataPerturbed"][0]["result"]
                                 ),
                                 suggestedMax: Math.max(
-                                    ...data["dataPerturbed"]["result"]
+                                    ...data["dataPerturbed"][0]["result"]
                                 ),
                             },
 

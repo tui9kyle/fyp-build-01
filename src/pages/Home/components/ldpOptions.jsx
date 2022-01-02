@@ -5,7 +5,12 @@ import ButtonSet from "./ldpOptions/buttonSet";
 import InputNumber from "./ldpOptions/inputNumber";
 import SelectMechanism from "./ldpOptions/selectMechanism";
 
-const LdpOptions = ({ setLdpOptions, setDataPerturbed, dataRaw }) => {
+const LdpOptions = ({
+    setLdpOptions,
+    setDataPerturbed,
+    dataRaw,
+    ldpOptions,
+}) => {
     const [mechanism, setMechanism] = useState("");
     const [epsilon, setEpsilon] = useState();
     const [k, setK] = useState();
@@ -13,6 +18,9 @@ const LdpOptions = ({ setLdpOptions, setDataPerturbed, dataRaw }) => {
     useEffect(() => {}, [mechanism]);
 
     function ldpCompute() {
+        // maximum load 5
+        if (ldpOptions.length >= 5) return;
+
         let result;
 
         switch (mechanism) {
@@ -22,26 +30,26 @@ const LdpOptions = ({ setLdpOptions, setDataPerturbed, dataRaw }) => {
                     k,
                     epsilon
                 );
-                setLdpOptions({ k, epsilon, mechanism });
+                setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
                 break;
 
             case "t_FPM":
                 result = Tldp.ForwardPerturbationMechanism(dataRaw, k, epsilon);
-                setLdpOptions({ k, epsilon, mechanism });
+                setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
                 break;
 
             case "t_TM":
                 result = Tldp.ThresholdMechanism(dataRaw, k, c0);
-                setLdpOptions({ k, c0, mechanism });
+                setLdpOptions((arr) => [...arr, { k, c0, mechanism }]);
                 break;
 
             case "v_LM":
                 result = Vldp.LaplaceMechanism(dataRaw, epsilon);
-                setLdpOptions({ epsilon, mechanism });
+                setLdpOptions((arr) => [...arr, { epsilon, mechanism }]);
                 break;
         }
 
-        setDataPerturbed(result);
+        setDataPerturbed((arr) => [...arr, result]);
     }
 
     if (mechanism == "t_BPM" || mechanism == "t_FPM") {
