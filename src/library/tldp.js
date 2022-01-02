@@ -70,50 +70,57 @@ export class Tldp {
     static ThresholdMechanism(data, k, c0) {
         let dataPerturbed = [];
         let debugArr = [];
-        let x = Array(data.length).fill(0);
 
         for (let i = 0; i < data.length; i++) {
-            console.log("!!! ", i);
-            // ! fixing... logic error: c should count i to i+k-1
-            let c = x.slice(i, i + k).filter((v) => v == 0).length;
-            console.log(c, " ", c0);
-            console.log(i, " ", i + k, " ", x.slice(i, i + k));
+            // count the number of 0s in {x[i], x[i+1], ..., x[i+k-1]}
+            let c = 0;
+            for (let j = i; j < i + k; j++) {
+                if (dataPerturbed[j] == null) c++;
+            }
+            console.log(dataPerturbed);
+            console.log(c);
+            console.log(c > c0);
+
             if (c > c0) {
-                // Randomly select an index l from X = {j|x_j = 0, i ≤ j ≤ i+k−1}
+                // randomly select an index l from {i <= j < i+k}
+                // and dataPerturbed[j] == 0
 
                 let p = Math.random();
-                var idx = Math.floor(p * c);
-                console.log("c > c0 ", idx);
-                debugArr[i] = p;
-                for (let j = 0; j <= idx; j++) {
-                    if (x[i + j] != 0) {
+                let idx = Math.floor(p * k + i);
+                console.log(p);
+                console.log(idx - i);
+                console.log(idx);
+
+                for (let j = i; j <= idx; j++) {
+                    if (dataPerturbed[j] != null) {
                         idx++;
                     }
                 }
-                // Dispatch S_i to R_l , and set x_l = 1
+                console.log(idx);
                 dataPerturbed[idx] = data[i];
-                x[idx] = 1;
-            } else if (x[i] == 0) {
-                console.log("(x[i] == 0");
+            } else if (dataPerturbed[i] == null) {
+                console.log(i);
                 dataPerturbed[i] = data[i];
-                debugArr[i] = "x_i = 0";
-                x[i] = 1;
             } else {
-                console.log("else case");
+                console.log(i);
                 let p = Math.random();
-                debugArr[i] = p;
-                var idx = Math.floor(p / c);
-                for (let j = 0; j <= idx; j++) {
-                    if (x[i + j] != 0) {
+                let idx = Math.floor(p * (k - 1) + (i + 1));
+                console.log(p);
+                console.log(idx);
+
+                for (let j = i; j <= idx; j++) {
+                    if (dataPerturbed[j] != null) {
                         idx++;
                     }
                 }
-
+                console.log(idx);
                 dataPerturbed[idx] = data[i];
-                x[idx] = 1;
             }
         }
-
+        for (let i = 0; i < dataPerturbed.length; i++) {
+            if (!dataPerturbed[i]) dataPerturbed[i] = "";
+        }
+        
         return { result: dataPerturbed, debugArr };
     }
 }
