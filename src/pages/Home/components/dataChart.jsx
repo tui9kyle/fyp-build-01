@@ -75,7 +75,7 @@ const DataChart = ({ data }) => {
         chartRef.current.resize(chartWidth, chartHeight);
     if (chartLabels == null)
         return (
-            <div className='overflow-x-scroll'>
+            <div className='overflow-scroll w-full'>
                 <Line
                     ref={chartRef}
                     data={{

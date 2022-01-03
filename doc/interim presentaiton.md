@@ -24,7 +24,8 @@ p {
 
 header {
 
-    right : 0 ;
+    right : 0;
+    margin-right: 0.5rem;
     text-align: right;
     color: #67758E;
 }
@@ -119,9 +120,32 @@ CHOW Lap Fung
 - the third party only gets the perturbed data
 - original data would not be transferred outside the device
 
+---
+# Time Series Data
+- 
 
 ---
+# Local Differential Privacy in the Temporal Setting (TLDP)
 
+
+---
+<!-- footer: "Methodology" -->
+
+![](./.assets/img01.png)
+
+
+
+---
+# Development Stack
+| Tool             | Description             |
+| ---------------- | ----------------------- |
+| **Node.Js**      | runtime environment     |
+| **Electron**     | application framework   |
+| **React**        | building user interface |
+| **Tailwind CSS** | styling                 |
+| **Chart.js**     | creating charts         |
+
+---
 # Local Differential Privacy (LDP)
 
 
@@ -131,15 +155,16 @@ $$
 
 
 
->  Math Stuffs | Description  
-> --- | ---
-> $\Pr$ | Perturbation
-> $\mathcal{A}$ | Randomized Algorithm
-> $v, v'$ | Any two input values
-> $v*$ | Output value     
-> $\epsilon$ | **Privacy Budget**
+| Math Stuffs   | Description          |
+| ------------- | -------------------- |
+| $\Pr$         | Perturbation         |
+| $\mathcal{A}$ | Randomized Algorithm |
+| $v, v'$       | Any two input values |
+| $v*$          | Output value         |
+| $\epsilon$    | Privacy Budget       |
 ---
-
+# Implementation of TDP
+---
 # Privacy Budget $\epsilon$
 
 ---
