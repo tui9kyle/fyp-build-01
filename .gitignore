@@ -25,5 +25,5 @@ yarn-error.log*
 
 /.vscode
 
-/doc/*.pdf
-/doc/*.html
+/doc/**/*.pdf
+/doc/**/*.html
