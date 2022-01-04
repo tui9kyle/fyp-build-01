@@ -15,6 +15,7 @@ const LdpOptions = ({
     const [epsilon, setEpsilon] = useState();
     const [k, setK] = useState();
     const [c0, setC0] = useState();
+    const [sensitivity, setSensitivity] = useState();
     useEffect(() => {}, [mechanism]);
 
     function ldpCompute() {
@@ -44,8 +45,11 @@ const LdpOptions = ({
                 break;
 
             case "v_LM":
-                result = Vldp.LaplaceMechanism(dataRaw, epsilon);
-                setLdpOptions((arr) => [...arr, { epsilon, mechanism }]);
+                result = Vldp.LaplaceMechanism(dataRaw, sensitivity, epsilon);
+                setLdpOptions((arr) => [
+                    ...arr,
+                    { sensitivity, epsilon, mechanism },
+                ]);
                 break;
         }
 
@@ -110,6 +114,13 @@ const LdpOptions = ({
                 <SelectMechanism
                     mechanism={mechanism}
                     setMechanism={setMechanism}
+                />
+                <InputNumber
+                    labelName='Sensitivity'
+                    value={sensitivity}
+                    setValue={setSensitivity}
+                    inputMin='0'
+                    inputStep='0.01'
                 />
                 <InputNumber
                     labelName='&epsilon;'
