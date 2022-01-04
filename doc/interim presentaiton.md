@@ -354,7 +354,22 @@ ThresholdMechanism(data, k, c0) {
 after the perturbation is implemented
 - lower value of introduces more randomization
 - resulting dataset would be more different from original dataset
-- better privacy preservation.
+- better privacy preservation
+---
+<!-- _footer: "" -->
+
+$\epsilon = 1$
+![](./.assets/7.png)
+$\epsilon = 5$
+![](./.assets/8.png)
+
+---
+<!-- _footer: "" -->
+$\epsilon = 10$
+![](./.assets/9.png)
+$\epsilon = 15$
+![](./.assets/10.png)
+
 ---
 <!-- footer: "Project Implementation" -->
 # Project Schedule
