@@ -12,10 +12,10 @@ function createWindow() {
         },
     });
 
-    // mainWindow.loadURL("http://localhost:3000");
+    mainWindow.loadURL("http://localhost:3000");
 
-    mainWindow.loadURL(`file://${__dirname}/build/index.html`);
-    mainWindow.webContents.openDevTools();
+    // mainWindow.loadURL(`file://${__dirname}/build/index.html`);
+    // mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
