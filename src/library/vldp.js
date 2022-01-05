@@ -25,6 +25,6 @@ export class Vldp {
             dataPerturbed[i] = data[i] + noise;
         }
 
-        return { result: dataPerturbed, debugArr };
+        return { result: dataPerturbed, debugArr, resultFilled: dataPerturbed };
     }
 }

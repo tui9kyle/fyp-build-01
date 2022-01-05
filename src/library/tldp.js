@@ -35,7 +35,7 @@ export class Tldp {
             }
         }
 
-        return { result: dataPerturbed, debugArr };
+        return { result: dataPerturbed, debugArr, resultFilled: dataPerturbed };
     }
 
     // Forward Perturbation Mechanism
@@ -58,12 +58,20 @@ export class Tldp {
                 }
             }
         }
+        let dataPerturbedFilled = dataPerturbed;
 
         for (let i = 0; i < dataPerturbed.length; i++) {
-            if (!dataPerturbed[i]) dataPerturbed[i] = "";
+            if (!dataPerturbed[i]) dataPerturbedFilled[i] = "-";
+            else {
+                dataPerturbedFilled[i] = dataPerturbed[i];
+            }
         }
 
-        return { result: dataPerturbed, debugArr };
+        return {
+            result: dataPerturbed,
+            debugArr,
+            resultFilled: dataPerturbedFilled,
+        };
     }
 
     // Threshold Mechanism
@@ -117,10 +125,20 @@ export class Tldp {
                 dataPerturbed[idx] = data[i];
             }
         }
+
+        let dataPerturbedFilled = dataPerturbed;
+
         for (let i = 0; i < dataPerturbed.length; i++) {
-            if (!dataPerturbed[i]) dataPerturbed[i] = "";
+            if (!dataPerturbed[i]) dataPerturbedFilled[i] = "-";
+            else {
+                dataPerturbedFilled[i] = dataPerturbed[i];
+            }
         }
-        
-        return { result: dataPerturbed, debugArr };
+        console.log(dataPerturbed.length);
+        return {
+            result: dataPerturbed,
+            debugArr,
+            resultFilled: dataPerturbedFilled,
+        };
     }
 }

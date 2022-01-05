@@ -2,7 +2,11 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 import { useState, useEffect, useRef } from "react";
-import { CustomColor, CustomColors } from "./ldpOptions/customColor";
+import {
+    CustomColor,
+    CustomColors,
+    CustomLightColors,
+} from "./ldpOptions/customColor";
 
 const DataChart = ({ data }) => {
     useEffect(() => {}, [data]);
@@ -42,7 +46,7 @@ const DataChart = ({ data }) => {
         let r = data["dataPerturbed"][i]["result"];
         // chart config
         if (Math.min(...r) < chartMin) {
-            chartMin = Math.min(...r);
+            chartMin = Math.min(...r) == 0 ? chartMin : Math.min(...r);
         }
         if (Math.max(...r) > chartMax) {
             chartMin = Math.max(...r);
@@ -61,7 +65,7 @@ const DataChart = ({ data }) => {
             {
                 label: "Perturbed Data " + (i + 1),
                 lineTension: 0,
-                borderColor: CustomColors[i],
+                borderColor: CustomLightColors[i],
                 borderWidth: 0.3,
                 data: r,
                 pointRadius: chartPointRadius,
@@ -110,8 +114,8 @@ const DataChart = ({ data }) => {
 
                         scales: {
                             y: {
-                                suggestedMin: chartMin,
-                                suggestedMax: chartMax,
+                                min: chartMin,
+                                max: chartMax,
                             },
                             xAxis: {
                                 display: false,

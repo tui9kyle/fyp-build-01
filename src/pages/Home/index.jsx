@@ -45,7 +45,7 @@ const Home = () => {
             {/* <DatasetConfigList optionList={ldpOptions} /> */}
 
             <div className='flex flex-row flex-nowrap'>
-                <DatasetConfigList opt={dataRaw}/>
+                <DatasetConfigList opt={dataRaw} />
                 {ldpOptions.map((opt, optIdx) => {
                     return <DatasetConfigList opt={opt} optIdx={optIdx} />;
                 })}
@@ -57,7 +57,7 @@ const Home = () => {
                 {dataPerturbed.map((dataPerturbedResult, idx) => {
                     return (
                         <DataList
-                            datalist={dataPerturbedResult["result"]}
+                            datalist={dataPerturbedResult["resultFilled"]}
                             idx={idx}
                         />
                     );

@@ -16,6 +16,15 @@ export const CustomColor = {
     purple: "rgba(119, 125, 167, 0.7)",
 };
 
+export const CustomLightColor = {
+    dull: "rgba(10, 10, 10, 0.2)",
+    red: "rgba(255, 10, 10, 0.2)",
+    green: "rgba(51, 115, 87, 0.2)",
+    blue: "rgba(20, 20, 2255, 0.2)",
+    yellow: "rgba(255, 145, 0, 0.2)",
+    purple: "rgba(119, 125, 167, 0.2)",
+};
+
 export const CustomColors = [
     CustomColor.red,
     CustomColor.blue,
@@ -30,4 +39,12 @@ export const CustomSolidColors = [
     CustomSolidColor.green,
     CustomSolidColor.purple,
     CustomSolidColor.yellow,
+];
+
+export const CustomLightColors = [
+    CustomLightColor.red,
+    CustomLightColor.blue,
+    CustomLightColor.green,
+    CustomLightColor.purple,
+    CustomLightColor.yellow,
 ];

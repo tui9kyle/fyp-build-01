@@ -3,6 +3,7 @@ marp: true
 theme: default
 size: 4:3
 paginate: true
+math: katex
 header: "EIE4430 Honours Project &emsp; _Interim Presentation_ \n **Differentially Private Time Series Data Release**"
 
 style: "
@@ -51,6 +52,9 @@ td {
     font-weight: normal;
     border : 0px !important;
     text-color: #5E6A82 !important;
+    vertical-align: top !important;
+    padding: 0px 6px 2px 8px;
+
 }
 
 tr {
@@ -73,7 +77,7 @@ pre span {
 }
 "
 
-math: katex
+
 ---
 
 <!-- _paginate: false -->
@@ -106,15 +110,15 @@ CHOW Lap Fung
 
 # Background & Problem Description
 
-- Data are important during the intelligent transformation in the industrial and academic sectors
-- Service providers collect user data
+- Data are important during the intelligent transformation in the industrial and academic sectors [1]
+- Service providers collect user data 
   - improve services, features based on statistics
-- Concerns of data privacy
+- Concerns of data privacy [2]
   - vulnerable to data breaches
 - Time series data are closely related to personal data
 
 ---
-### Examples of Time-series Data Consist of Personal Information 
+### Examples of Time-series Data Consist of Personal Information [3]
 -	IoT appliances for Smart home
 -	Biometric sensor on wearables and health devices 
 -	Location tracking
@@ -127,18 +131,9 @@ CHOW Lap Fung
 
 
 # Local Differential Privacy (LDP)
-- perturbs data the users' devices **locally**
+- perturbs data the users' devices **locally** [2]
 - the third party only gets the perturbed data
 - original data would not be transferred outside the device
-
----
-# Time Series Data
-- temporal data: a regular time interval
-- indexed with a timestamp
----
-# Local Differential Privacy in the Temporal Setting (TLDP)
-- Perturbing data with a randomized algorithm may cause significant distortion of the values in time-series data.
-
 ---
 
 # Local Differential Privacy (LDP)
@@ -159,6 +154,22 @@ $$
 | $\epsilon$    | Privacy Budget       |
 
 ---
+
+# Local Differential Privacy (LDP)
+
+![](./.assets/pic1.png)
+
+---
+
+# Local Differential Privacy (LDP)
+![](./.assets/pic2.png)
+
+---
+# Local Differential Privacy (LDP)
+![](./.assets/pic3.png)
+
+---
+<!-- footer: "Perturbation Mechanism" -->
 # Perturbation Mechanism
 - a randomized algorithm satisfies differential privacy
 $$
@@ -191,9 +202,39 @@ $$
 | $s$         | Sensitivity    |
 | $\epsilon$  | Privacy budget |
 
+---
+# Laplace Mechanism
+
+![](./.assets/pic4.png)
+
+---
+# Local Differential Privacy in the Value Setting (VLDP)
+![](./.assets/pic5.png)
+
+---
+# Time Series Data
+- temporal data: a regular time interval
+- indexed with a timestamp [3]
+
+---
+# Local Differential Privacy in the Temporal Setting (TLDP)
+- Perturbing data with a randomized algorithm may cause significant distortion of the values in time-series data
+
+![h:350](./.assets/pic6.png)
+
+---
+
+# VLDP vs TLDP
+![](./.assets/img02.png)
+
+  - Red: Laplace Mechanism `VLDP`
+    -  $\epsilon = 0.5, \text{sensitivity} = 1$
+  - Blue: Backward Perturbation Mechanism `TLDP`
+    - $\epsilon = 0.5, k = 5$
 
 
 ---
+<!-- footer: "Methodology" -->
 # Implementation of TLDP
 - **Backward Perturbation Mechanism**
 - **Forward Perturbation Mechanism**
@@ -202,11 +243,12 @@ $$
 
 # Backward Perturbation Mechanism
 - release a drawn value from the **previous** $k$ time timestamps
+- **output-driven**
 
 ![Backward Perturbation Mechanism](./.assets/ye1-p10-ye-large.gif)
 
 ---
-probabilities satisfying $\epsilon$-LDP
+# Probabilities satisfying $\epsilon$-LDP
 $$
 \Pr (P_i = S_{i-j}) := p_j = 
 \begin{cases}
@@ -221,6 +263,7 @@ $$
 ---
 # Forward Perturbation Mechanism
 - dispatch each data in the **following** $k$ timestamps
+- **input-driven**
 ![Forward Perturbation Mechanism](./.assets/ye2-p10-ye-large.gif)
 
 ---
@@ -234,37 +277,39 @@ $$
 
 ---
 # Development Stack
-| Tool             | Description             |
-| ---------------- | ----------------------- |
-| **Node.Js**      | runtime environment     |
-| **Electron**     | application framework   |
-| **React**        | building user interface |
-| **Tailwind CSS** | styling                 |
-| **Chart.js**     | creating charts         |
+| Tool             | Description             |     |
+| ---------------- | ----------------------- | --- |
+| **Node.Js**      | runtime environment     | [5] |
+| **Electron**     | application framework   | [6] |
+| **React**        | building user interface | [7] |
+| **Tailwind CSS** | styling                 | [8] |
+| **Chart.js**     | creating charts         | [9] |
 
 
 ---
 # User Interface
-![w:350](./.assets/2.png) ![w:350](./.assets/1.png) 
+![w:380](./.assets/img04.png) ![w:380](./.assets/img03.png) 
 
 ---
 # Data and parameter inputs
+![](./.assets/img05.png) 
 - a text file with the format of each datum at a line
 ![w:500](./.assets/3.png)
 
 
 ---
 # Data and parameter inputs
-![w:500](./.assets/4.png)
+![w:340](./.assets/img06.png) ![w:340](./.assets/img07.png)
+![w:350](./.assets/img08.png)
 
 ---
 # Chart Presentation
-![](./.assets/5.png)
+![](./.assets/img09.png)
 
 ---
 # Data List
 
-![h:500](./.assets/6.png)
+![](./.assets/img10.png)
 
 
 ---
@@ -272,42 +317,78 @@ $$
 # Data Sources
 - Heart rate time series from MIT-BIH Database Distribution
 - Datasets from UC Irvine Machine Learning Repository
----
-# VLDP vs TLDP
-![](./.assets/img02.png)
-- Green: Backward Perturbation Mechanism
-  - $\epsilon = 0.5, k = 10$
-- Red: Laplace Mechanism
-  -  $\epsilon = 0.5, \text{sensitivity} = 1$
+
+
 ---
 # Privacy Budget $\epsilon$
 - indicates the degree of privacy preserved 
 after the perturbation is implemented
 - lower value of introduces more randomization
 - resulting dataset would be more different from original dataset
-- better privacy preservation
+- &darr;$\epsilon$ $=$  &uarr; privacy preservation
+
+
 ---
 <!-- _footer: "" -->
+<!-- _header: "EIE4430 Honours Project &emsp; _Interim Presentation_ \n **Differentially Private Time Series Data Release** \n These results are obtained with the heart rate dataset \n with Backward Perturbation Mechanism and **window size of 20**." -->
 
 $\epsilon = 1$
-![](./.assets/7.png)
+![](./.assets/img-e-1.png)
 $\epsilon = 5$
-![](./.assets/8.png)
-
----
-<!-- _footer: "" -->
+![](./.assets/img-e-5.png)
 $\epsilon = 10$
-![](./.assets/9.png)
-$\epsilon = 15$
-![](./.assets/10.png)
+![](./.assets/img-e-10.png)
+
+
+
 
 ---
 
 # Window size $k$
+- greater than 1 
+- the output are drawn from k values
+- &uarr;$k$ $=$  &uarr; privacy preservation
 
+<br/>
+
+$k = 1$
+![](./.assets/img-k-1.png)
+
+---
+<!-- _footer: "" -->
+<!-- _header: "EIE4430 Honours Project &emsp; _Interim Presentation_ \n **Differentially Private Time Series Data Release** \n These results are obtained with the heart rate dataset \n with Backward Perturbation Mechanism and **ϵ of 5**." -->
+
+
+
+$k = 5$
+![](./.assets/img-k-5.png)
+$k = 15$
+![](./.assets/img-k-15.png)
+$k = 25$
+![](./.assets/img-k-25.png)
 
 ---
 <!-- footer: "Project Implementation" -->
+
+
+<style scoped>
+h1 {
+    margin: 0px !important; 
+}
+
+td {
+    font-size: 0.7rem !important;
+    font-weight: normal;
+    border : 0px !important;
+    text-color: #5E6A82 !important;
+    vertical-align: top !important;
+    padding: 0px 2rem 2px 0.5rem;
+
+}
+footer {margin-top :0 !important}
+</style>
+
+
 # Project Schedule
 | Project Task / Milestone             |      Date       |  Status  |
 | ------------------------------------ | :-------------: | :------: |
@@ -329,7 +410,7 @@ $\epsilon = 15$
 
 # Proposed Future Work
 - Implementation of Threshold Mechanism
-  - Threshold Mechanism with targeted $\epsilon$
+  - Threshold Mechanism
   - Extended Threshold Mechanism
 
 - Data analysis of the perturbed data
@@ -344,8 +425,39 @@ TLDP
 
 ---
 <!-- footer: "References" -->
+
+
+<style scoped>
+h1 {
+    margin: 0px !important; 
+}
+
+td {
+    font-size: 0.63rem !important;
+    font-weight: normal;
+    border : 0px !important;
+    text-color: #5E6A82 !important;
+    vertical-align: top !important;
+    padding: 0px 0px 0px 5px;
+
+
+}
+footer {margin-top :0 !important}
+</style>
 # References
-[wip]
+|      |                                                                                                                                                                           |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [1]  | Y. Huo, C. Meng, R. Li and T. Jing, "An overview of privacy preserving schemes for industrial Internet of Things," China communications, vol. 17, no. 10, pp. 1-18, 2020. |
+| [2]  | Q. Ye, H. Hu, N. Li, X. Meng, H. Zheng and H. Yan, Beyond Value Perturbation: Local Differential Privacy in the Temporal Setting, 2021.                                   |
+| [3]  | Q. Ye and H. Hu, "Local Differential Privacy: Tools, Challenges, and Opportunities".                                                                                      |
+| [4]  | "What is time series data?," InfluxData Inc, [Online]. Available: https://www.influxdata.com/what-is-time-series-data/.                                                   |
+| [5]  | "Node.js," OpenJS Foundation, [Online]. Available: https://nodejs.org/en/about/. [Accessed 25 12 2021].                                                                   |
+| [6]  | "Electron," OpenJS Foundation, [Online]. Available: https://www.electronjs.org/. [Accessed 31 12 2021]                                                                    |
+| [7]  | "React," Meta Platforms, Inc., [Online]. Available: https://reactjs.org/. [Accessed 25 12 2021].                                                                          |
+| [8]  | "Tailwind CSS," [Online]. Available: https://tailwindcss.com/. [Accessed 24 12 2021].                                                                                     |
+| [9]  | "Chart.js," [Online]. Available: https://www.chartjs.org/. [Accessed 25 12 2021].                                                                                         |
+| [10] | G. B. Moody, "Heart rate time series," [Online]. Available: https://ecg.mit.edu/time-series/index.html. [Accessed 25 12 2021].                                            |
+| [11] | "UCI Machine Learning Repository," University of California, Irvine, [Online]. Available: https://archive.ics.uci.edu/ml/index.php. [Accessed 25 12 2021].                |
 
 ---
 <!-- footer: "The end &emsp; Q&A" -->
