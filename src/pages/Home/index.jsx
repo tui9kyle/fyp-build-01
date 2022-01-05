@@ -5,12 +5,15 @@ import DataList from "./components/dataList";
 import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
 import DargDiv from "./components/dragDiv";
+import DatasetConfigList from "./components/datasetConfigList";
 
 const Home = () => {
     const [ldpOptions, setLdpOptions] = useState([]);
     const [dataRaw, setDataRaw] = useState();
     const [dataPerturbed, setDataPerturbed] = useState([]);
     const isLoaded = useRef(true);
+
+    const ldpOptionsMaps = [];
     return (
         <div className='app'>
             <div className='flex flex-row '>
@@ -38,13 +41,28 @@ const Home = () => {
             <DataChart
                 data={{ dataRaw: dataRaw, dataPerturbed: dataPerturbed }}
             />
-            <DataList
-                data={{
-                    dataRaw: dataRaw,
-                    dataPerturbed: dataPerturbed,
-                }}
-                ldpOptions={ldpOptions}
-            />
+
+            {/* <DatasetConfigList optionList={ldpOptions} /> */}
+
+            <div className='flex flex-row flex-nowrap'>
+                <DatasetConfigList opt={dataRaw}/>
+                {ldpOptions.map((opt, optIdx) => {
+                    return <DatasetConfigList opt={opt} optIdx={optIdx} />;
+                })}
+            </div>
+
+            <div className='flex flex-row flex-nowrap'>
+                <DataList datalist={dataRaw} idx={"raw"} />
+
+                {dataPerturbed.map((dataPerturbedResult, idx) => {
+                    return (
+                        <DataList
+                            datalist={dataPerturbedResult["result"]}
+                            idx={idx}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };

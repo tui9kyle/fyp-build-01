@@ -25,7 +25,7 @@ const LdpOptions = ({
         let result;
 
         switch (mechanism) {
-            case "t_BPM":
+            case "BPM":
                 result = Tldp.BackwardPerturbationMechanism(
                     dataRaw,
                     k,
@@ -34,17 +34,17 @@ const LdpOptions = ({
                 setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
                 break;
 
-            case "t_FPM":
+            case "FPM":
                 result = Tldp.ForwardPerturbationMechanism(dataRaw, k, epsilon);
                 setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
                 break;
 
-            case "t_TM":
+            case "TM":
                 result = Tldp.ThresholdMechanism(dataRaw, k, c0);
                 setLdpOptions((arr) => [...arr, { k, c0, mechanism }]);
                 break;
 
-            case "v_LM":
+            case "LM":
                 result = Vldp.LaplaceMechanism(dataRaw, sensitivity, epsilon);
                 setLdpOptions((arr) => [
                     ...arr,
@@ -56,7 +56,7 @@ const LdpOptions = ({
         setDataPerturbed((arr) => [...arr, result]);
     }
 
-    if (mechanism == "t_BPM" || mechanism == "t_FPM") {
+    if (mechanism == "BPM" || mechanism == "FPM") {
         return (
             <div className='row'>
                 <h4 className='font-sans'>LDP Mechanism Options</h4>
@@ -81,7 +81,7 @@ const LdpOptions = ({
                 <ButtonSet onClick={ldpCompute} />
             </div>
         );
-    } else if (mechanism == "t_TM") {
+    } else if (mechanism == "TM") {
         return (
             <div className='row'>
                 <h4 className='font-sans'>LDP Mechanism Options</h4>
@@ -107,7 +107,7 @@ const LdpOptions = ({
                 <ButtonSet onClick={ldpCompute} />
             </div>
         );
-    } else if (mechanism == "v_LM") {
+    } else if (mechanism == "LM") {
         return (
             <div className='row'>
                 <h4 className='font-sans'>LDP Mechanism Options</h4>

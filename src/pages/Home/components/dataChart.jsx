@@ -2,6 +2,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 import { useState, useEffect, useRef } from "react";
+import { CustomColor, CustomColors } from "./ldpOptions/customColor";
 
 const DataChart = ({ data }) => {
     useEffect(() => {}, [data]);
@@ -9,8 +10,8 @@ const DataChart = ({ data }) => {
     let chartDatasets = [];
     let chartLabels;
     let chartMin, chartMax, chartWidth, chartHeight;
-    let chartWidthScale = 5;
-
+    let chartWidthScale = 10;
+    let chartPointRadius = 2;
     chartHeight = 250;
 
     if (data["dataRaw"] != null) {
@@ -26,12 +27,12 @@ const DataChart = ({ data }) => {
             {
                 label: "Original Data",
                 lineTension: 0,
-                borderColor: "rgba(200, 200, 200,0.8)",
-                borderWidth: 0.5,
+                borderColor: CustomColor.dull,
+                borderWidth: 0.3,
                 data: data["dataRaw"], //raw
-                pointRadius: 2,
-                pointBackgroundColor: "rgba(200, 200, 200,0.8)",
-                pointBorderColor: "rgba(200, 200, 200,0.8)",
+                pointRadius: chartPointRadius,
+                pointBackgroundColor: CustomColor.dull,
+                pointBorderColor: CustomColor.dull,
                 order: 1,
             },
         ];
@@ -60,12 +61,12 @@ const DataChart = ({ data }) => {
             {
                 label: "Perturbed Data " + (i + 1),
                 lineTension: 0,
-                borderColor: "hsla(" + 80 * i + ", 100%, 40%, 0.8)",
-                borderWidth: 0.5,
+                borderColor: CustomColors[i],
+                borderWidth: 0.3,
                 data: r,
-                pointRadius: 2,
-                pointBackgroundColor: "hsla(" + 80 * i + ", 100%, 40%, 0.8)",
-                pointBorderColor: "hsla(" + 80 * i + ", 100%, 40%, 0.8)",
+                pointRadius: chartPointRadius,
+                pointBackgroundColor: CustomColors[i],
+                pointBorderColor: CustomColors[i],
                 order: 0 - i,
             },
         ];
@@ -112,6 +113,13 @@ const DataChart = ({ data }) => {
                                 suggestedMin: chartMin,
                                 suggestedMax: chartMax,
                             },
+                            xAxis: {
+                                display: false,
+                            },
+                        },
+
+                        plugins: {
+                            legend: false,
                         },
                     }}
                 />
