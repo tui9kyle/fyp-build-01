@@ -27,3 +27,4 @@ yarn-error.log*
 
 /doc/**/*.pdf
 /doc/**/*.html
+package-lock.json
