@@ -9,19 +9,6 @@ export class TldpUtilities {
             );
         } else return 1 / (k - 1 + Math.pow(Math.E, epsilon / 2));
     }
-
-    static BinarySearch(arr, target) {
-        let left = 0;
-        let right = arr.length;
-        let middle = 0;
-        while (left <= right) {
-            middle = Math.floor((left + right) / 2.0);
-            if (arr[middle] < target) left = middle + 1;
-            else if (arr[middle > target]) right = middle - 1;
-            else return middle;
-            return -1;
-        }
-    }
 }
 
 export class Tldp {
@@ -159,6 +146,22 @@ export class Tldp {
     static ExtendedThresholdMechanism(data, k, epsilon) {
         let dataPerturbed = [];
         let debugArr = [];
+
+        // initialize binary search range l = 2 and r = k - 1
+
+        let left = 2;
+        let right = k - 1;
+
+        while (left <= right) {
+            let c0 = Math.floor((left + right) / 2.0);
+
+            // dev ing...
+
+            if (arr[middle] < target) left = middle + 1;
+            else if (arr[middle > target]) right = middle - 1;
+            else return middle;
+            return -1;
+        }
 
         for (let i = 0; i < data.length; i++) {
             // count the number of 0s in {x[i], x[i+1], ..., x[i+k-1]}
