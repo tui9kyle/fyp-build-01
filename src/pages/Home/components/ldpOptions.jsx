@@ -39,6 +39,11 @@ const LdpOptions = ({
                 setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
                 break;
 
+            case "ETM":
+                result = Tldp.ExtendedThresholdMechanism(dataRaw, k, epsilon);
+                setLdpOptions((arr) => [...arr, { k, epsilon, mechanism }]);
+                break;
+
             case "TM":
                 result = Tldp.ThresholdMechanism(dataRaw, k, c0);
                 setLdpOptions((arr) => [...arr, { k, c0, mechanism }]);
@@ -56,7 +61,7 @@ const LdpOptions = ({
         setDataPerturbed((arr) => [...arr, result]);
     }
 
-    if (mechanism == "BPM" || mechanism == "FPM") {
+    if (mechanism == "BPM" || mechanism == "FPM" || mechanism == "ETM") {
         return (
             <div className='row'>
                 <h4 className='font-sans'>LDP Mechanism Options</h4>
