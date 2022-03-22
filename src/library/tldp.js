@@ -29,6 +29,23 @@ export class TldpUtilities {
 
         return -1;
     }
+
+    static ETMPerturbationProbability() {}
+
+    static ETMOptimalThreshold() {
+        let optimalThreshold =
+            2.0 *
+            Math.max(
+                Math.log(
+                    TldpUtilities.PerturbationProbability(epsilon, k, 0) /
+                        TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                ),
+                Math.log(
+                    TldpUtilities.PerturbationProbability(epsilon, k, k - 1) /
+                        TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                )
+            );
+    }
 }
 
 export class Tldp {
