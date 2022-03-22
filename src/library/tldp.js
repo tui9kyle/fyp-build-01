@@ -30,6 +30,27 @@ export class TldpUtilities {
         return -1;
     }
 
+    static ETMGkm(k, m, c0) {
+        //  m = k - c0;
+        if (m == 1) return 2 / k;
+        else {
+            let sum1 = 0;
+            for (let l = 1; l <= m; l++) {
+                sum1 += Math.pow(-1 / c0, l);
+
+                let product1 = 1;
+                for (let i = 1; i <= l + 1; i++) {
+                    product1 *= (k - i) / i;
+
+                    let product2 = 1;
+                    for (let i = 1; i <= l - 1; i++) {
+                        product2 *= ETMGkm(k - i, m - i, c0);
+                    }
+                }
+            }
+        }
+    }
+
     static ETMPerturbationProbability() {}
 
     static ETMOptimalThreshold() {
