@@ -3,7 +3,7 @@
 import Main from "electron/main";
 
 export class TldpUtilities {
-    static PerturbationProbability(epsilon, k, j) {
+    static BaselinePerturbationProbability(epsilon, k, j) {
         if (j === 0) {
             return (
                 Math.pow(Math.E, epsilon / 2) /
@@ -30,8 +30,10 @@ export class TldpUtilities {
         return -1;
     }
 
-    static ETMGkm(k, m, c0) {
+    static ETMGkm(k, m) {
         //  m = k - c0;
+        let c0 = k - m;
+        // base case
         if (m == 1) return 2 / k;
         else {
             let sum1 = 0;
@@ -46,24 +48,50 @@ export class TldpUtilities {
                     for (let i = 1; i <= l - 1; i++) {
                         product2 *= ETMGkm(k - i, m - i, c0);
                     }
+                    product1 *= product2;
                 }
+                sum1 *= product1;
             }
+            return m / (1 - sum1);
         }
     }
 
-    static ETMPerturbationProbability() {}
+    static ETMDispatchProbability(k, c0, j) {
+        // m = k - c0
+        let m = k - c0;
+        // p_0
+        if (j == 0) {
+            return 1 - TldpUtilities.ETMGkm(k, m);
+        }
+    }
 
     static ETMOptimalThreshold() {
         let optimalThreshold =
             2.0 *
             Math.max(
                 Math.log(
-                    TldpUtilities.PerturbationProbability(epsilon, k, 0) /
-                        TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                    TldpUtilities.BaselinePerturbationProbability(
+                        epsilon,
+                        k,
+                        0
+                    ) /
+                        TldpUtilities.BaselinePerturbationProbability(
+                            epsilon,
+                            k,
+                            1
+                        )
                 ),
                 Math.log(
-                    TldpUtilities.PerturbationProbability(epsilon, k, k - 1) /
-                        TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                    TldpUtilities.BaselinePerturbationProbability(
+                        epsilon,
+                        k,
+                        k - 1
+                    ) /
+                        TldpUtilities.BaselinePerturbationProbability(
+                            epsilon,
+                            k,
+                            1
+                        )
                 )
             );
     }
@@ -83,7 +111,11 @@ export class Tldp {
             let idx = 1;
 
             for (let j = 0; j <= tmpK; j++) {
-                idx -= TldpUtilities.PerturbationProbability(epsilon, tmpK, j);
+                idx -= TldpUtilities.BaselinePerturbationProbability(
+                    epsilon,
+                    tmpK,
+                    j
+                );
 
                 if (idx <= p) {
                     dataPerturbed[i] = data[i - j];
@@ -107,7 +139,11 @@ export class Tldp {
             let idx = 0;
 
             for (let j = 0; j <= k; j++) {
-                idx += TldpUtilities.PerturbationProbability(epsilon, k, j);
+                idx += TldpUtilities.BaselinePerturbationProbability(
+                    epsilon,
+                    k,
+                    j
+                );
 
                 if (idx >= p) {
                     dataPerturbed[i + j] = data[i];
@@ -216,15 +252,28 @@ export class Tldp {
                 2.0 *
                 Math.max(
                     Math.log(
-                        TldpUtilities.PerturbationProbability(epsilon, k, 0) /
-                            TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                        TldpUtilities.BaselinePerturbationProbability(
+                            epsilon,
+                            k,
+                            0
+                        ) /
+                            TldpUtilities.BaselinePerturbationProbability(
+                                epsilon,
+                                k,
+                                1
+                            )
                     ),
                     Math.log(
-                        TldpUtilities.PerturbationProbability(
+                        TldpUtilities.BaselinePerturbationProbability(
                             epsilon,
                             k,
                             k - 1
-                        ) / TldpUtilities.PerturbationProbability(epsilon, k, 1)
+                        ) /
+                            TldpUtilities.BaselinePerturbationProbability(
+                                epsilon,
+                                k,
+                                1
+                            )
                     )
                 );
         }
