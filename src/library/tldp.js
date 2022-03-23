@@ -62,36 +62,57 @@ export class TldpUtilities {
         // p_0
         if (j == 0) {
             return 1 - TldpUtilities.ETMGkm(k, m);
+        } else if (j == 1) {
+            let sum1 = 0;
+            for (let l = 1; l <= m; l++) {
+                sum1 += Math.pow(-1 / c0, l);
+
+                let product1 = 1;
+                for (let i = 0; i <= l - 1; i++) {
+                    product1 *= TldpUtilities.ETMGkm(k - i, m - i);
+
+                    let product2 = 1;
+                    for (let i = 1; i <= l; i++) {
+                        product2 *= (k - 1 - i) / i;
+                    }
+                    product1 *= product2;
+                }
+                sum1 *= product1;
+            }
+            return TldpUtilities.ETMGkm(k, m) + sum1;
+        } else {
+            // j > 1
+            let sum1 = 0;
+            for (let l = 1; l <= m; l++) {
+                sum1 += Math.pow(-1 / c0, l);
+
+                let product1 = 1;
+                for (let i = 0; i <= l - 1; i++) {
+                    product1 *= TldpUtilities.ETMGkm(k - i, m - i);
+
+                    let product2 = 1;
+                    for (let i = 1; i <= l - 1; i++) {
+                        product2 *= ((k - j - i) / (i + 1)) * l;
+                    }
+                    product1 *= product2;
+                }
+                sum1 *= product1;
+            }
+            return -1 * sum1;
         }
     }
 
-    static ETMOptimalThreshold() {
+    static ETMOptimalThreshold(k, c0) {
         let optimalThreshold =
             2.0 *
             Math.max(
                 Math.log(
-                    TldpUtilities.BaselinePerturbationProbability(
-                        epsilon,
-                        k,
-                        0
-                    ) /
-                        TldpUtilities.BaselinePerturbationProbability(
-                            epsilon,
-                            k,
-                            1
-                        )
+                    ETMDispatchProbability(k, c0, 0) /
+                        ETMDispatchProbability(k, c0, 1)
                 ),
                 Math.log(
-                    TldpUtilities.BaselinePerturbationProbability(
-                        epsilon,
-                        k,
-                        k - 1
-                    ) /
-                        TldpUtilities.BaselinePerturbationProbability(
-                            epsilon,
-                            k,
-                            1
-                        )
+                    ETMDispatchProbability(k, c0, k - 1) /
+                        ETMDispatchProbability(k, c0, 1)
                 )
             );
     }
@@ -248,34 +269,7 @@ export class Tldp {
 
         while (l < r) {
             let c0 = Math.floor((l + r) / 2);
-            let hatEpsilon1 =
-                2.0 *
-                Math.max(
-                    Math.log(
-                        TldpUtilities.BaselinePerturbationProbability(
-                            epsilon,
-                            k,
-                            0
-                        ) /
-                            TldpUtilities.BaselinePerturbationProbability(
-                                epsilon,
-                                k,
-                                1
-                            )
-                    ),
-                    Math.log(
-                        TldpUtilities.BaselinePerturbationProbability(
-                            epsilon,
-                            k,
-                            k - 1
-                        ) /
-                            TldpUtilities.BaselinePerturbationProbability(
-                                epsilon,
-                                k,
-                                1
-                            )
-                    )
-                );
+            let hatEpsilon1 = TldpUtilities.ETMOptimalThreshold(k, c0);
         }
     }
 }
