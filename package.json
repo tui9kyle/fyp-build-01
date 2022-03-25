@@ -4,11 +4,11 @@
     "private": true,
     "main": "main.js",
     "dependencies": {
-        "@testing-library/jest-dom": "^5.16.2",
+        "@testing-library/jest-dom": "^5.16.3",
         "@testing-library/react": "^12.1.4",
         "@testing-library/user-event": "^13.5.0",
         "chart.js": "^3.7.1",
-        "electron": "^17.1.2",
+        "electron": "^17.2.0",
         "json-server": "^0.17.0",
         "react": "^17.0.2",
         "react-chartjs-2": "^4.0.1",
