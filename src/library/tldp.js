@@ -1,7 +1,5 @@
 // Local Differential Privacy in Temporal Setting
 
-import Main from "electron/main";
-
 export class TldpUtilities {
     static BaselinePerturbationProbability(epsilon, k, j) {
         if (j === 0) {
@@ -10,24 +8,6 @@ export class TldpUtilities {
                 (k - 1 + Math.pow(Math.E, epsilon / 2))
             );
         } else return 1 / (k - 1 + Math.pow(Math.E, epsilon / 2));
-    }
-    static BinarySearch(arr, key) {
-        let start = 0;
-        let end = arr.length - 1;
-
-        while (start <= end) {
-            let middle = Math.floor((start + end) / 2);
-
-            if (arr[middle] === key) {
-                return middle;
-            } else if (arr[middle] < key) {
-                start = middle + 1;
-            } else {
-                end = middle - 1;
-            }
-        }
-
-        return -1;
     }
 
     static ETMGkm(k, m) {
@@ -46,7 +26,7 @@ export class TldpUtilities {
 
                     let product2 = 1;
                     for (let i = 1; i <= l - 1; i++) {
-                        product2 *= ETMGkm(k - i, m - i, c0);
+                        product2 *= TldpUtilities.ETMGkm(k - i, m - i, c0);
                     }
                     product1 *= product2;
                 }
@@ -107,14 +87,16 @@ export class TldpUtilities {
             2.0 *
             Math.max(
                 Math.log(
-                    ETMDispatchProbability(k, c0, 0) /
-                        ETMDispatchProbability(k, c0, 1)
+                    TldpUtilities.ETMDispatchProbability(k, c0, 0) /
+                        TldpUtilities.ETMDispatchProbability(k, c0, 1)
                 ),
                 Math.log(
-                    ETMDispatchProbability(k, c0, k - 1) /
-                        ETMDispatchProbability(k, c0, 1)
+                    TldpUtilities.ETMDispatchProbability(k, c0, k - 1) /
+                        TldpUtilities.ETMDispatchProbability(k, c0, 1)
                 )
             );
+
+        return optimalThreshold;
     }
 }
 
@@ -200,9 +182,6 @@ export class Tldp {
             for (let j = i; j < i + k; j++) {
                 if (dataPerturbed[j] == null) c++;
             }
-            console.log(dataPerturbed);
-            console.log(c);
-            console.log(c > c0);
 
             if (c > c0) {
                 // randomly select an index l from {i <= j < i+k}
@@ -210,33 +189,26 @@ export class Tldp {
 
                 let p = Math.random();
                 let idx = Math.floor(p * k + i);
-                console.log(p);
-                console.log(idx - i);
-                console.log(idx);
 
                 for (let j = i; j <= idx; j++) {
                     if (dataPerturbed[j] != null) {
                         idx++;
                     }
                 }
-                console.log(idx);
+
                 dataPerturbed[idx] = data[i];
             } else if (dataPerturbed[i] == null) {
-                console.log(i);
                 dataPerturbed[i] = data[i];
             } else {
-                console.log(i);
                 let p = Math.random();
                 let idx = Math.floor(p * (k - 1) + (i + 1));
-                console.log(p);
-                console.log(idx);
 
                 for (let j = i; j <= idx; j++) {
                     if (dataPerturbed[j] != null) {
                         idx++;
                     }
                 }
-                console.log(idx);
+
                 dataPerturbed[idx] = data[i];
             }
         }
@@ -249,7 +221,65 @@ export class Tldp {
                 dataPerturbedFilled[i] = dataPerturbed[i];
             }
         }
-        console.log(dataPerturbed.length);
+
+        return {
+            result: dataPerturbed,
+            debugArr,
+            resultFilled: dataPerturbedFilled,
+        };
+    }
+
+    // Threshold Mechanism
+    static ThresholdMechanismExtendedPerturb(data, k, r, epsilon, p0, p1) {
+        let dataPerturbed = [];
+        let debugArr = [];
+
+        for (let i = 0; i < data.length; i++) {
+            let c = 0;
+            for (let j = i; j < i + k; j++) {
+                if (dataPerturbed[j] == null) c++;
+            }
+
+            if (c > r) {
+                let p = Math.random();
+                let idx = Math.floor(p * k + i);
+
+                for (let j = i; j <= idx; j++) {
+                    if (dataPerturbed[j] != null) {
+                        idx++;
+                    }
+                }
+
+                dataPerturbed[idx] = data[i];
+            } else if (dataPerturbed[i] == null) {
+                //  S_i is dispatched to R_i with p = (e^(\epsilon / 2) p_1) / p_2
+
+                let p = (Math.pow(Math.E, epsilon / 2) * p1) / p0;
+                let seed = Math.random();
+                if (seed < p) dataPerturbed[i] = data[i];
+            } else {
+                let p = Math.random();
+                let idx = Math.floor(p * (k - 1) + (i + 1));
+
+                for (let j = i; j <= idx; j++) {
+                    if (dataPerturbed[j] != null) {
+                        idx++;
+                    }
+                }
+
+                dataPerturbed[idx] = data[i];
+            }
+        }
+
+        let dataPerturbedFilled = dataPerturbed;
+
+        for (let i = 0; i < dataPerturbed.length; i++) {
+            if (!dataPerturbed[i]) dataPerturbedFilled[i] = "-";
+            else {
+                dataPerturbedFilled[i] = dataPerturbed[i];
+            }
+        }
+
         return {
             result: dataPerturbed,
             debugArr,
@@ -259,17 +289,71 @@ export class Tldp {
 
     // (Extended) Threshold Mechanism
     static ExtendedThresholdMechanism(data, k, epsilon) {
-        let dataPerturbed = [];
-        let debugArr = [];
+        // parameter epsilon: input privacy budget
 
         // initialize binary search range l = 2 and r = k - 1
 
         let l = 2;
         let r = k - 1;
-
+        let c0star;
         while (l < r) {
             let c0 = Math.floor((l + r) / 2);
             let hatEpsilon1 = TldpUtilities.ETMOptimalThreshold(k, c0);
+            console.log("hatEpsilon1:" + hatEpsilon1);
+            if (hatEpsilon1 < epsilon) {
+                l = c0;
+            } else {
+                let hatEpsilon2 = TldpUtilities.ETMOptimalThreshold(k, c0 - 1);
+                console.log("hatEpsilon2:" + hatEpsilon2);
+                if (hatEpsilon2 > hatEpsilon1) {
+                    l = c0;
+                } else {
+                    r = c0;
+                }
+            }
+            if (l + 1 == r) {
+                console.log("l:" + l);
+                console.log("r:" + r);
+                let hatEpsilon3 = TldpUtilities.ETMOptimalThreshold(k, l);
+                let hatEpsilon4 = TldpUtilities.ETMOptimalThreshold(k, r);
+
+                if (hatEpsilon3 <= epsilon) {
+                    c0star = l;
+                    break;
+                } else if (hatEpsilon4 <= epsilon) {
+                    c0star = r;
+                    break;
+                } else {
+                    // extended Threshold Mechanism
+                    l = r;
+                    r = k - 1;
+                    while (l < r) {
+                        c0 = Math.floor((l + r) / 2);
+                        let hatEpsilon5 = TldpUtilities.ETMOptimalThreshold(
+                            k,
+                            c0
+                        );
+                        if (hatEpsilon5 <= epsilon) {
+                            r = c0;
+                        } else {
+                            l = c0;
+                        }
+                        if (l + 1 == r) {
+                            // return R ExtendedPerturb(S,k,r)
+                            Tldp.ThresholdMechanismExtendedPerturb(
+                                data,
+                                k,
+                                r,
+                                epsilon,
+                                TldpUtilities.ETMDispatchProbability(k, c0, 0),
+                                TldpUtilities.ETMDispatchProbability(k, c0, 1)
+                            );
+                        }
+                    }
+                }
+            }
         }
+
+        return Tldp.ThresholdMechanism(data, k, c0star);
     }
 }
