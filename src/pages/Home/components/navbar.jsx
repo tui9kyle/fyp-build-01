@@ -4,8 +4,8 @@ const NavBarItem = ({ name, idx }) => {
     return (
         <>
             <li>
-                <div className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'>
-                    <a className='text-gray-300  text-m font-medium self-center'>
+                <div className='flex hover:text-red-800 px-4 hover:bg-black hover:bg-opacity-30 h-8  items-stretch text-gray-800 '>
+                    <a className='text-m font-medium self-center'>
                         {name}
                     </a>
                 </div>
