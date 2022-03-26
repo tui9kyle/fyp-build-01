@@ -1,13 +1,20 @@
 import { useState } from "react";
 
-const FileMenu = () => {
+const FileMenu = ({ setUiFileTxt }) => {
+    const callUiFileTxt = () => {
+        setUiFileTxt(true);
+    };
+
     return (
         <>
             <div className=' w-0  '>
                 <div className='relative bg-slate-800 w-fit'>
                     <ul className='flex flex-col w-max'>
                         <li>
-                            <div className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'>
+                            <div
+                                className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'
+                                onClick={callUiFileTxt}
+                            >
                                 <a className='text-gray-300  text-m font-medium self-center'>
                                     Open File (plaintext)
                                 </a>
@@ -27,15 +34,15 @@ const FileMenu = () => {
     );
 };
 
-const MenuBar = ({}) => {
-    const [showFileMenu, setShowFileMenu] = useState(false);
+const MenuBar = ({ setUiFileTxt }) => {
+    const [uiFileMenu, setUiFileMenu] = useState(false);
     const callFileMenu = () => {
-        setShowFileMenu(!showFileMenu);
+        setUiFileMenu(!uiFileMenu);
     };
 
     const hideFileMenu = () => {
         setTimeout(function () {
-            setShowFileMenu(false);
+            setUiFileMenu(false);
         }, 500);
     };
 
@@ -53,9 +60,10 @@ const MenuBar = ({}) => {
                                     File
                                 </a>
                             </div>
-                            {showFileMenu ? <FileMenu /> : null}
+                            {uiFileMenu ? (
+                                <FileMenu setUiFileTxt={setUiFileTxt} />
+                            ) : null}
                         </div>
-
                     </div>
                     <div className='flex justify-end flex-auto items-stretch'>
                         <a className='text-gray-400  px-3 text-sm font-medium self-center'>

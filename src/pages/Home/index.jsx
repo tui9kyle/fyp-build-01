@@ -6,6 +6,7 @@ import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
 import DargDiv from "./components/dragDiv";
 import DatasetConfigList from "./components/datasetConfigList";
+import MenuBar from "./components/menubar";
 
 const Home = () => {
     const [ldpOptions, setLdpOptions] = useState([]);
@@ -14,57 +15,55 @@ const Home = () => {
     const isLoaded = useRef(true);
 
     const ldpOptionsMaps = [];
+
+    // ui
+    const [uiFileTxt, setUiFileTxt] = useState(false);
+
     return (
-        <div className='app'>
-            <DargDiv />
-            <div className='flex flex-row '>
-                <h1 className='font-sans text-2xl basis-2/3'>
-                    {/* Local Differential Privacy in the Temporal Setting */}
-                </h1>
+        <>
+            <MenuBar setUiFileTxt={setUiFileTxt}/>
+            {uiFileTxt ? <FileInput setDataRaw={setDataRaw} uiController={setUiFileTxt}/> : null}
+            <div className='app'>
+                <DargDiv />
 
-                <div className='basis-1/3'>
-                    {" "}
-                    <FileInput setDataRaw={setDataRaw} />
-                </div>
-            </div>
-
-            <div className='flex flex-row '>
-                <div className='basis-1/2'>
-                    <LdpOptions
-                        ldpOptions={ldpOptions}
-                        setLdpOptions={setLdpOptions}
-                        setDataPerturbed={setDataPerturbed}
-                        dataRaw={dataRaw}
-                    />
-                </div>
-            </div>
-
-            <DataChart
-                data={{ dataRaw: dataRaw, dataPerturbed: dataPerturbed }}
-            />
-
-            {/* <DatasetConfigList optionList={ldpOptions} /> */}
-
-            <div className='flex flex-row flex-nowrap'>
-                <DatasetConfigList opt={dataRaw} />
-                {ldpOptions.map((opt, optIdx) => {
-                    return <DatasetConfigList opt={opt} optIdx={optIdx} />;
-                })}
-            </div>
-
-            <div className='flex flex-row flex-nowrap'>
-                <DataList datalist={dataRaw} idx={"raw"} />
-
-                {dataPerturbed.map((dataPerturbedResult, idx) => {
-                    return (
-                        <DataList
-                            datalist={dataPerturbedResult["resultFilled"]}
-                            idx={idx}
+                <div className='flex flex-row '>
+                    <div className='basis-1/2'>
+                        <LdpOptions
+                            ldpOptions={ldpOptions}
+                            setLdpOptions={setLdpOptions}
+                            setDataPerturbed={setDataPerturbed}
+                            dataRaw={dataRaw}
                         />
-                    );
-                })}
+                    </div>
+                </div>
+
+                <DataChart
+                    data={{ dataRaw: dataRaw, dataPerturbed: dataPerturbed }}
+                />
+
+                {/* <DatasetConfigList optionList={ldpOptions} /> */}
+
+                <div className='flex flex-row flex-nowrap'>
+                    <DatasetConfigList opt={dataRaw} />
+                    {ldpOptions.map((opt, optIdx) => {
+                        return <DatasetConfigList opt={opt} optIdx={optIdx} />;
+                    })}
+                </div>
+
+                <div className='flex flex-row flex-nowrap'>
+                    <DataList datalist={dataRaw} idx={"raw"} />
+
+                    {dataPerturbed.map((dataPerturbedResult, idx) => {
+                        return (
+                            <DataList
+                                datalist={dataPerturbedResult["resultFilled"]}
+                                idx={idx}
+                            />
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
