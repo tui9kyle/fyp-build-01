@@ -1,6 +1,8 @@
-const FileInput = ({ setDataRaw, uiController }) => {
+const FileInput = ({ setDataRaw, uiController, setDataFileMeta }) => {
     async function getFile(e) {
         const file = e.target.files[0];
+        console.log(file.name);
+    
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = () => {

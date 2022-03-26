@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Home from "./pages/Home";
-
+import AppHome from "./pages/Home";
 
 import "./index-light.css";
 
 ReactDOM.render(
     <React.StrictMode>
-  
-        <Home />
+        <AppHome />
     </React.StrictMode>,
     document.getElementById("root")
 );

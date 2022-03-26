@@ -7,9 +7,14 @@ import DataChart from "./components/dataChart";
 import DargDiv from "./components/dragDiv";
 import DatasetConfigList from "./components/datasetConfigList";
 import MenuBar from "./components/menubar";
+import NavBar from "./components/navbar";
 
-const Home = () => {
+const AppHome = () => {
     const [ldpOptions, setLdpOptions] = useState([]);
+    const [dataFileMeta, setDataFileMeta] = useState({
+        format: "",
+        filename: "",
+    });
     const [dataRaw, setDataRaw] = useState();
     const [dataPerturbed, setDataPerturbed] = useState([]);
     const isLoaded = useRef(true);
@@ -17,13 +22,21 @@ const Home = () => {
     const ldpOptionsMaps = [];
 
     // ui
+    const [uiDir, setUiDir] = useState("home");
     const [uiFileTxt, setUiFileTxt] = useState(false);
 
     return (
         <>
-            <MenuBar setUiFileTxt={setUiFileTxt}/>
-            {uiFileTxt ? <FileInput setDataRaw={setDataRaw} uiController={setUiFileTxt}/> : null}
+            <MenuBar setUiFileTxt={setUiFileTxt} />
+            {uiFileTxt ? (
+                <FileInput
+                    setDataRaw={setDataRaw}
+                    uiController={setUiFileTxt}
+                />
+            ) : null}
+
             <div className='app'>
+                <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
                 <DargDiv />
 
                 <div className='flex flex-row '>
@@ -67,4 +80,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default AppHome;
