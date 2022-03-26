@@ -19,7 +19,7 @@ const Home = () => {
             <DargDiv />
             <div className='flex flex-row '>
                 <h1 className='font-sans text-2xl basis-2/3'>
-                    Local Differential Privacy in the Temporal Setting
+                    {/* Local Differential Privacy in the Temporal Setting */}
                 </h1>
 
                 <div className='basis-1/3'>
