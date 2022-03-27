@@ -12,7 +12,7 @@ const NavBarItem = ({ name, uiPath }) => {
             ) : (
                 <li>
                     <div
-                        className='flex  hover:underline hover:decoration-solid mr-6 h-8 items-stretch text-gray-500 cursor-pointer'
+                        className='flex hover:underline hover:decoration-solid mr-6 h-8 items-stretch text-gray-500 cursor-pointer'
                         onClick={() => uiPath.setPath(name)}
                     >
                         <a className='text-2xl self-center'>{name}</a>

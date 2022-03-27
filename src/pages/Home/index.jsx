@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import FileInput from "./components/fileInput";
+import FileInput from "./components/fileInput/fileInput";
 
 import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
@@ -8,38 +8,50 @@ import DargDiv from "./components/dragDiv";
 import DatasetConfigList from "./components/datasetConfigList";
 import MenuBar from "./components/menubar";
 import NavBar from "./components/navbar";
-import DataListView from "../DataList/dataList"
-
+import DataListView from "../DataList/dataList";
 
 const AppHome = () => {
-    const [ldpOptions, setLdpOptions] = useState([]);
+    // data file
     const [dataFileMeta, setDataFileMeta] = useState({
         format: "",
         filename: "",
     });
+    const [dataTimeInterval, setDataTimeInterval] = useState();
+    // data
     const [dataRaw, setDataRaw] = useState();
     const [dataPerturbed, setDataPerturbed] = useState([]);
-    const isLoaded = useRef(true);
 
+    const [ldpOptions, setLdpOptions] = useState([]);
     const ldpOptionsMaps = [];
 
     // ui
+
     const [uiDir, setUiDir] = useState("Home");
     const [uiFileTxt, setUiFileTxt] = useState(false);
 
     return (
         <>
-            <MenuBar setUiFileTxt={setUiFileTxt} />
+            <MenuBar
+                setUiFileTxt={setUiFileTxt}
+                dataFileName={dataFileMeta.filename}
+            />
+
+            <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
+
+            {uiDir == "Data" ? (
+                <DataListView
+                    dataRaw={dataRaw}
+                    dataPerturbed={dataPerturbed}
+                    DatasetConfigList={DatasetConfigList}
+                    ldpOptions={ldpOptions}
+                />
+            ) : null}
             {uiFileTxt ? (
                 <FileInput
                     setDataRaw={setDataRaw}
                     uiController={setUiFileTxt}
+                    setDataFileMeta={setDataFileMeta}
                 />
-            ) : null}
-            <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
-
-            {uiDir == "Data" ? (
-                <DataListView dataRaw={dataRaw} dataPerturbed={dataPerturbed} DatasetConfigList={DatasetConfigList} ldpOptions={ldpOptions}/>
             ) : null}
 
             <div className='app'>
@@ -61,7 +73,6 @@ const AppHome = () => {
                 />
 
                 {/* <DatasetConfigList optionList={ldpOptions} /> */}
-
             </div>
         </>
     );
