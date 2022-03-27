@@ -1,50 +1,24 @@
 import { useState } from "react";
 
-const FileMenu = ({ setUiFileTxt }) => {
-    const callUiFileTxt = () => {
-        setUiFileTxt(true);
-    };
-
-    return (
-        <>
-            <div className=' w-0  '>
-                <div className='relative bg-slate-800 w-fit'>
-                    <ul className='flex flex-col w-max'>
-                        <li>
-                            <div
-                                className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'
-                                onClick={callUiFileTxt}
-                            >
-                                <a className='text-gray-300  text-m font-medium self-center'>
-                                    Open File (plaintext)
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'>
-                                <a className='text-gray-300  text-m font-medium self-center'>
-                                    Open File (csv)
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </>
-    );
-};
+import FileMenu from "./menubar/fileMenu";
+import AboutMenu from "./menubar/aboutMenu";
 
 const MenuBar = ({ setUiFileTxt }) => {
     const [uiFileMenu, setUiFileMenu] = useState(false);
-    const callFileMenu = () => {
-        setUiFileMenu(!uiFileMenu);
-    };
+    const [uiAboutMenu, setUiAboutMenu] = useState(false);
+    const callFileMenu = () => setUiFileMenu(!uiFileMenu);
 
-    const hideFileMenu = () => {
-        setTimeout(function () {
+    const hideFileMenu = () =>
+        setTimeout(() => {
             setUiFileMenu(false);
         }, 500);
-    };
+
+    const callAboutMenu = () => setUiAboutMenu(!uiAboutMenu);
+
+    const hideAboutMenu = () =>
+        setTimeout(() => {
+            setUiAboutMenu(false);
+        }, 500);
 
     return (
         <>
@@ -56,13 +30,24 @@ const MenuBar = ({ setUiFileTxt }) => {
                                 className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'
                                 onClick={callFileMenu}
                             >
-                                <a className='text-gray-300  text-m font-medium self-center'>
+                                <a className='text-gray-300 text-m font-medium self-center'>
                                     File
                                 </a>
                             </div>
                             {uiFileMenu ? (
                                 <FileMenu setUiFileTxt={setUiFileTxt} />
                             ) : null}
+                        </div>
+                        <div onMouseLeave={hideAboutMenu}>
+                            <div
+                                className='flex hover:text-white px-4 hover:bg-white hover:bg-opacity-30 h-8  items-stretch'
+                                onClick={callAboutMenu}
+                            >
+                                <a className='text-gray-300  text-m font-medium self-center'>
+                                    About
+                                </a>
+                            </div>
+                            {uiAboutMenu ? <AboutMenu /> : null}
                         </div>
                     </div>
                     <div className='flex justify-end flex-auto items-stretch'>

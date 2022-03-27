@@ -37,7 +37,7 @@ const AppHome = () => {
 
             <div className='app'>
                 <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
-                <DargDiv />
+                {/* <DargDiv /> */}
 
                 <div className='flex flex-row '>
                     <div className='basis-1/2'>
