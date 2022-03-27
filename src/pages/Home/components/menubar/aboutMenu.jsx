@@ -1,7 +1,7 @@
 const AboutMenu = () => {
     return (
         <>
-            <div className=' w-0  '>
+            <div className='w-0'>
                 <div className='relative bg-slate-800 w-fit'>
                     <ul className='flex flex-col w-max'>
                         <li>

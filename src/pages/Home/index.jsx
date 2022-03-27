@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 
 import FileInput from "./components/fileInput";
-import DataList from "./components/dataList";
+
 import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
 import DargDiv from "./components/dragDiv";
 import DatasetConfigList from "./components/datasetConfigList";
 import MenuBar from "./components/menubar";
 import NavBar from "./components/navbar";
+import DataListView from "../DataList/dataList"
+
 
 const AppHome = () => {
     const [ldpOptions, setLdpOptions] = useState([]);
@@ -22,7 +24,7 @@ const AppHome = () => {
     const ldpOptionsMaps = [];
 
     // ui
-    const [uiDir, setUiDir] = useState("home");
+    const [uiDir, setUiDir] = useState("Home");
     const [uiFileTxt, setUiFileTxt] = useState(false);
 
     return (
@@ -34,9 +36,13 @@ const AppHome = () => {
                     uiController={setUiFileTxt}
                 />
             ) : null}
+            <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
+
+            {uiDir == "Data" ? (
+                <DataListView dataRaw={dataRaw} dataPerturbed={dataPerturbed} DatasetConfigList={DatasetConfigList} ldpOptions={ldpOptions}/>
+            ) : null}
 
             <div className='app'>
-                <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
                 {/* <DargDiv /> */}
 
                 <div className='flex flex-row '>
@@ -56,25 +62,6 @@ const AppHome = () => {
 
                 {/* <DatasetConfigList optionList={ldpOptions} /> */}
 
-                <div className='flex flex-row flex-nowrap'>
-                    <DatasetConfigList opt={dataRaw} />
-                    {ldpOptions.map((opt, optIdx) => {
-                        return <DatasetConfigList opt={opt} optIdx={optIdx} />;
-                    })}
-                </div>
-
-                <div className='flex flex-row flex-nowrap'>
-                    <DataList datalist={dataRaw} idx={"raw"} />
-
-                    {dataPerturbed.map((dataPerturbedResult, idx) => {
-                        return (
-                            <DataList
-                                datalist={dataPerturbedResult["resultFilled"]}
-                                idx={idx}
-                            />
-                        );
-                    })}
-                </div>
             </div>
         </>
     );

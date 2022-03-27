@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CustomColor, CustomColors } from "./ldpOptions/customColor";
+import { CustomColor, CustomColors } from "../../Home/components/ldpOptions/customColor";
 
 const DataList = ({ datalist, idx }) => {
     useEffect(() => {}, [datalist]);

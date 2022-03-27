@@ -11,14 +11,14 @@ const MenuBar = ({ setUiFileTxt }) => {
     const hideFileMenu = () =>
         setTimeout(() => {
             setUiFileMenu(false);
-        }, 500);
+        }, 300);
 
     const callAboutMenu = () => setUiAboutMenu(!uiAboutMenu);
 
     const hideAboutMenu = () =>
         setTimeout(() => {
             setUiAboutMenu(false);
-        }, 500);
+        }, 300);
 
     return (
         <>
