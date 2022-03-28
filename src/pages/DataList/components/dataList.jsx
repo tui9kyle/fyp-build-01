@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { CustomColor, CustomColors } from "../../Home/components/ldpOptions/customColor";
+import {
+    CustomColor,
+    CustomColors,
+} from "../../Home/components/ldpOptions/customColor";
 
 const DataList = ({ datalist, idx, dataTimestampConfig }) => {
     useEffect(() => {}, [datalist]);
@@ -22,13 +25,15 @@ const DataList = ({ datalist, idx, dataTimestampConfig }) => {
                         </thead> */}
                         <tbody>
                             {datalist.map((d, idx) => (
-                                <tr className="text-right">
+                                <tr className='text-right'>
                                     <td className='font-mono text-xs text-gray-400 pr-1 text-right font-light'>
                                         {idx}
                                     </td>
 
                                     <td className='font-mono text-right text-slate-600 text-sm font-light pr-3'>
-                                        { (dataTimestampConfig.interval) ? idx * dataTimestampConfig.interval : null}
+                                        {dataTimestampConfig.interval
+                                            ? idx * dataTimestampConfig.interval
+                                            : null}
                                     </td>
                                     <td className='font-mono text-center'>
                                         {d}
@@ -55,11 +60,13 @@ const DataList = ({ datalist, idx, dataTimestampConfig }) => {
                         </thead> */}
                         <tbody>
                             {datalist.map((d) => (
-                                <tr>
-                                    <td className='font-mono text-center'>
-                                        {d}
-                                    </td>
-                                </tr>
+                         
+                                    <tr>
+                                        <td className='font-mono text-center'>
+                                            {d}
+                                        </td>
+                                    </tr>
+                           
                             ))}
                         </tbody>
                     </table>

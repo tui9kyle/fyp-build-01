@@ -10,92 +10,93 @@ export class TldpUtilities {
         } else return 1 / (k - 1 + Math.pow(Math.E, epsilon / 2));
     }
 
-    static ETMGkm(k, m) {
-        //  m = k - c0;
-        let c0 = k - m;
+    static EtmG(k, m) {
         // base case
-        if (m == 1) return 2 / k;
-        else {
+        if (m == 1) {
+            return 2 / k;
+        } else {
+            //  m = k - c0;
+            let c0 = k - m;
             let sum1 = 0;
             for (let l = 1; l <= m; l++) {
-                sum1 += Math.pow(-1 / c0, l);
-
                 let product1 = 1;
                 for (let i = 1; i <= l + 1; i++) {
-                    product1 *= (k - i) / i;
-
                     let product2 = 1;
                     for (let i = 1; i <= l - 1; i++) {
-                        product2 *= TldpUtilities.ETMGkm(k - i, m - i, c0);
+                        product2 *= TldpUtilities.EtmG(k - i, m - i);
                     }
-                    product1 *= product2;
+                    product1 *= ((k - i) / i) * product2;
                 }
-                sum1 *= product1;
+                sum1 += Math.pow(-1 / c0, l) * product1;
             }
             return m / (1 - sum1);
         }
     }
 
-    static ETMDispatchProbability(k, c0, j) {
+    static EtmDispatchProbability(k, c0, j) {
         // m = k - c0
         let m = k - c0;
         // p_0
         if (j == 0) {
-            return 1 - TldpUtilities.ETMGkm(k, m);
+            console.log("gkm: " + TldpUtilities.EtmG(k, m));
+            return 1 - TldpUtilities.EtmG(k, m);
         } else if (j == 1) {
             let sum1 = 0;
             for (let l = 1; l <= m; l++) {
-                sum1 += Math.pow(-1 / c0, l);
-
                 let product1 = 1;
                 for (let i = 0; i <= l - 1; i++) {
-                    product1 *= TldpUtilities.ETMGkm(k - i, m - i);
-
                     let product2 = 1;
                     for (let i = 1; i <= l; i++) {
                         product2 *= (k - 1 - i) / i;
                     }
-                    product1 *= product2;
+                    product1 *= TldpUtilities.EtmG(k - i, m - i) * product2;
                 }
-                sum1 *= product1;
+                sum1 += Math.pow(-1 / c0, l) * product1;
             }
-            return TldpUtilities.ETMGkm(k, m) + sum1;
+            return TldpUtilities.EtmG(k, m) + sum1;
         } else {
             // j > 1
             let sum1 = 0;
             for (let l = 1; l <= m; l++) {
-                sum1 += Math.pow(-1 / c0, l);
-
                 let product1 = 1;
                 for (let i = 0; i <= l - 1; i++) {
-                    product1 *= TldpUtilities.ETMGkm(k - i, m - i);
-
                     let product2 = 1;
                     for (let i = 1; i <= l - 1; i++) {
                         product2 *= ((k - j - i) / (i + 1)) * l;
                     }
-                    product1 *= product2;
+                    product1 *= TldpUtilities.EtmG(k - i, m - i) * product2;
                 }
-                sum1 *= product1;
+                sum1 += Math.pow(-1 / c0, l) * product1;
             }
             return -1 * sum1;
         }
     }
 
-    static ETMOptimalThreshold(k, c0) {
+    static EtmOptimalThreshold(k, c0) {
+        console.log("k: " + k + " c0: " + c0);
+        for (let i = 0; i < k; i++) {
+            console.log(
+                "p(" +
+                    i +
+                    "): " +
+                    TldpUtilities.EtmDispatchProbability(k, c0, i)
+            );
+        }
+
         let optimalThreshold =
             2.0 *
             Math.max(
                 Math.log(
-                    TldpUtilities.ETMDispatchProbability(k, c0, 0) /
-                        TldpUtilities.ETMDispatchProbability(k, c0, 1)
+                    TldpUtilities.EtmDispatchProbability(k, c0, 0) /
+                        TldpUtilities.EtmDispatchProbability(k, c0, 1)
                 ),
                 Math.log(
-                    TldpUtilities.ETMDispatchProbability(k, c0, k - 1) /
-                        TldpUtilities.ETMDispatchProbability(k, c0, 1)
+                    TldpUtilities.EtmDispatchProbability(k, c0, k - 1) /
+                        TldpUtilities.EtmDispatchProbability(k, c0, 1)
                 )
             );
 
+        console.log(optimalThreshold);
         return optimalThreshold;
     }
 }
@@ -298,24 +299,21 @@ export class Tldp {
         let c0star;
         while (l < r) {
             let c0 = Math.floor((l + r) / 2);
-            let hatEpsilon1 = TldpUtilities.ETMOptimalThreshold(k, c0);
+            let hatEpsilon1 = TldpUtilities.EtmOptimalThreshold(k, c0);
             console.log("hatEpsilon1:" + hatEpsilon1);
             if (hatEpsilon1 < epsilon) {
                 l = c0;
             } else {
-                let hatEpsilon2 = TldpUtilities.ETMOptimalThreshold(k, c0 - 1);
+                let hatEpsilon2 = TldpUtilities.EtmOptimalThreshold(k, c0 - 1);
                 console.log("hatEpsilon2:" + hatEpsilon2);
-                if (hatEpsilon2 > hatEpsilon1) {
-                    l = c0;
-                } else {
-                    r = c0;
-                }
+                if (hatEpsilon2 > hatEpsilon1) l = c0;
+                else r = c0;
             }
             if (l + 1 == r) {
-                console.log("l:" + l);
-                console.log("r:" + r);
-                let hatEpsilon3 = TldpUtilities.ETMOptimalThreshold(k, l);
-                let hatEpsilon4 = TldpUtilities.ETMOptimalThreshold(k, r);
+                console.log("l: " + l);
+                console.log("r: " + r);
+                let hatEpsilon3 = TldpUtilities.EtmOptimalThreshold(k, l);
+                let hatEpsilon4 = TldpUtilities.EtmOptimalThreshold(k, r);
 
                 if (hatEpsilon3 <= epsilon) {
                     c0star = l;
@@ -329,24 +327,22 @@ export class Tldp {
                     r = k - 1;
                     while (l < r) {
                         c0 = Math.floor((l + r) / 2);
-                        let hatEpsilon5 = TldpUtilities.ETMOptimalThreshold(
+                        let hatEpsilon5 = TldpUtilities.EtmOptimalThreshold(
                             k,
                             c0
                         );
-                        if (hatEpsilon5 <= epsilon) {
-                            r = c0;
-                        } else {
-                            l = c0;
-                        }
+                        if (hatEpsilon5 <= epsilon) r = c0;
+                        else l = c0;
+
                         if (l + 1 == r) {
                             // return R ExtendedPerturb(S,k,r)
-                            Tldp.ThresholdMechanismExtendedPerturb(
+                            return Tldp.ThresholdMechanismExtendedPerturb(
                                 data,
                                 k,
                                 r,
                                 epsilon,
-                                TldpUtilities.ETMDispatchProbability(k, c0, 0),
-                                TldpUtilities.ETMDispatchProbability(k, c0, 1)
+                                TldpUtilities.EtmDispatchProbability(k, c0, 0),
+                                TldpUtilities.EtmDispatchProbability(k, c0, 1)
                             );
                         }
                     }
