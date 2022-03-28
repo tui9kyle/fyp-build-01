@@ -24,6 +24,8 @@
         "eject": "react-scripts eject",
         "json-server": "json-server --watch data/test.json --port 5000",
         "dev": "concurrently \"BROWSER=none npm start\" \"npm run json-server\"",
+        "dev-web": "BROWSER=none npm start",
+        "dev-app-web": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
         "dev-app": "concurrently \"BROWSER=none npm start\" \"npm run json-server\" \"wait-on http://localhost:3000 && electron .\"",
         "dev-app-nowait": "concurrently \"BROWSER=none npm start\" \"npm run json-server\" \"electron .\""
     },
