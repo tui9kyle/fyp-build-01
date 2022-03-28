@@ -11,7 +11,6 @@ import NavBar from "./components/navbar";
 import DataListView from "../DataList/dataListView";
 import AnalysisView from "../Analysis/analysisView";
 
-
 const AppHome = () => {
     // data file
     const [dataFileMeta, setDataFileMeta] = useState({
@@ -57,8 +56,7 @@ const AppHome = () => {
                         start: dataTimestampStart,
                         setStart: setDataTimestampStart,
                         unit: dataTimeUnit,
-                        setUnit: setDataTimeUnit
-
+                        setUnit: setDataTimeUnit,
                     }}
                 />
             ) : null}
@@ -70,7 +68,6 @@ const AppHome = () => {
                     setDataFileMeta={setDataFileMeta}
                 />
             ) : null}
-
 
             {uiDir == "Perturbation" ? (
                 <div className='app'>
@@ -87,11 +84,12 @@ const AppHome = () => {
                         </div>
                     </div>
 
-
                     <div className='flex flex-row flex-nowrap'>
                         <DatasetConfigList opt={dataRaw} />
                         {ldpOptions.map((opt, optIdx) => {
-                            return <DatasetConfigList opt={opt} optIdx={optIdx} />;
+                            return (
+                                <DatasetConfigList opt={opt} optIdx={optIdx} />
+                            );
                         })}
                     </div>
 
@@ -99,20 +97,20 @@ const AppHome = () => {
                 </div>
             ) : null}
 
-
             {uiDir == "Chart" ? (
                 <div className='app'>
-
-
-
-
                     <DataChart
-                        data={{ dataRaw: dataRaw, dataPerturbed: dataPerturbed }}
+                        data={{
+                            dataRaw: dataRaw,
+                            dataPerturbed: dataPerturbed,
+                        }}
                     />
                     <div className='flex flex-row flex-nowrap'>
                         <DatasetConfigList opt={dataRaw} />
                         {ldpOptions.map((opt, optIdx) => {
-                            return <DatasetConfigList opt={opt} optIdx={optIdx} />;
+                            return (
+                                <DatasetConfigList opt={opt} optIdx={optIdx} />
+                            );
                         })}
                     </div>
 
@@ -120,8 +118,7 @@ const AppHome = () => {
                 </div>
             ) : null}
 
-
-{uiDir == "Analysis" ? (
+            {uiDir == "Analysis" ? (
                 <AnalysisView
                     dataRaw={dataRaw}
                     dataPerturbed={dataPerturbed}
@@ -134,12 +131,10 @@ const AppHome = () => {
                         start: dataTimestampStart,
                         setStart: setDataTimestampStart,
                         unit: dataTimeUnit,
-                        setUnit: dataTimeUnit
-
+                        setUnit: dataTimeUnit,
                     }}
                 />
             ) : null}
-
         </>
     );
 };
