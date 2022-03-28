@@ -16,7 +16,6 @@ const SelectMechanism = ({ mechanism, setMechanism }) => {
                     <option value=''>--Please choose an option--</option>
                     <option value='BPM'>Backward Perturbation Mechanism</option>
                     <option value='FPM'>Forward Perturbation Mechanism</option>
-
                     <option value='TM'>Threshold Mechanism</option>
                     <option value='ETM'>Threshold Mechanism (Extended)</option>
                     <option value='LM'>Laplace Mechanism</option>

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { CustomColor, CustomColors } from "../../Home/components/ldpOptions/customColor";
 
-const DataList = ({ datalist, idx }) => {
+const DataList = ({ datalist, idx, dataTimestampConfig }) => {
     useEffect(() => {}, [datalist]);
 
     if (datalist != null) {
         if (idx == "raw") {
             return (
-                <div className='basis-1/6'>
+                <div className='basis-1/4'>
                     <table className='mx-auto'>
                         {/* <thead>
                             <tr>
@@ -22,9 +22,13 @@ const DataList = ({ datalist, idx }) => {
                         </thead> */}
                         <tbody>
                             {datalist.map((d, idx) => (
-                                <tr>
-                                    <td className='font-mono text-center text-gray-400 pr-5'>
+                                <tr className="text-right">
+                                    <td className='font-mono text-xs text-gray-400 pr-1 text-right font-light'>
                                         {idx}
+                                    </td>
+
+                                    <td className='font-mono text-right text-slate-600 text-sm font-light pr-3'>
+                                        { (dataTimestampConfig.interval) ? idx * dataTimestampConfig.interval : null}
                                     </td>
                                     <td className='font-mono text-center'>
                                         {d}
