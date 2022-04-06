@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import FileInput from "./components/fileInput/fileInput";
+import LoadDemoData from "./components/fileInput/demoData";
 
 import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
@@ -17,10 +18,7 @@ const AppHome = () => {
         format: "",
         filename: "",
     });
-    // timestamp config
-    const [dataTimeInterval, setDataTimeInterval] = useState();
-    const [dataTimeUnit, setDataTimeUnit] = useState();
-    const [dataTimestampStart, setDataTimestampStart] = useState();
+
 
     // data
     const [dataRaw, setDataRaw] = useState();
@@ -32,12 +30,11 @@ const AppHome = () => {
     // ui
 
     const [uiDir, setUiDir] = useState("Home");
-    const [uiFileTxt, setUiFileTxt] = useState(false);
-
+    const [uiOverlayDir, setUiOverlayDir] = useState("");
     return (
         <>
             <MenuBar
-                setUiFileTxt={setUiFileTxt}
+                setUiOverlayDir={setUiOverlayDir}
                 dataFileName={dataFileMeta.filename}
             />
 
@@ -50,21 +47,22 @@ const AppHome = () => {
                     dataFileMeta={dataFileMeta}
                     DatasetConfigList={DatasetConfigList}
                     ldpOptions={ldpOptions}
-                    dataTimestampConfig={{
-                        interval: dataTimeInterval,
-                        setInterval: setDataTimeInterval,
-                        start: dataTimestampStart,
-                        setStart: setDataTimestampStart,
-                        unit: dataTimeUnit,
-                        setUnit: setDataTimeUnit,
-                    }}
+                   
                 />
             ) : null}
 
-            {uiFileTxt ? (
+            {uiOverlayDir == "FileTxt" ? (
                 <FileInput
                     setDataRaw={setDataRaw}
-                    uiController={setUiFileTxt}
+                    uiController={setUiOverlayDir}
+                    setDataFileMeta={setDataFileMeta}
+                />
+            ) : null}
+
+            {uiOverlayDir == "FileDemoData" ? (
+                <LoadDemoData
+                    setDataRaw={setDataRaw}
+                    uiController={setUiOverlayDir}
                     setDataFileMeta={setDataFileMeta}
                 />
             ) : null}
@@ -125,14 +123,7 @@ const AppHome = () => {
                     dataFileMeta={dataFileMeta}
                     DatasetConfigList={DatasetConfigList}
                     ldpOptions={ldpOptions}
-                    dataTimestampConfig={{
-                        interval: dataTimeInterval,
-                        setInterval: setDataTimeInterval,
-                        start: dataTimestampStart,
-                        setStart: setDataTimestampStart,
-                        unit: dataTimeUnit,
-                        setUnit: dataTimeUnit,
-                    }}
+               
                 />
             ) : null}
         </>

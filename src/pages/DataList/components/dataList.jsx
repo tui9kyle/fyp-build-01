@@ -10,7 +10,7 @@ const DataList = ({ datalist, idx, dataTimestampConfig }) => {
     if (datalist != null) {
         if (idx == "raw") {
             return (
-                <div className='basis-1/4'>
+                <div className='basis-1/6'>
                     <table className='mx-auto'>
                         {/* <thead>
                             <tr>
@@ -30,11 +30,7 @@ const DataList = ({ datalist, idx, dataTimestampConfig }) => {
                                         {idx}
                                     </td>
 
-                                    <td className='font-mono text-right text-slate-600 text-sm font-light pr-3'>
-                                        {dataTimestampConfig.interval
-                                            ? idx * dataTimestampConfig.interval
-                                            : null}
-                                    </td>
+                             
                                     <td className='font-mono text-center'>
                                         {d}
                                     </td>

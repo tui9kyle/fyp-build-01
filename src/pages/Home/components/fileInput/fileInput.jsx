@@ -16,11 +16,11 @@ const FileInput = ({ setDataRaw, uiController, setDataFileMeta }) => {
                 setDataRaw(arr);
             }
         };
-        uiController(false);
+        uiController("");
     }
 
     const hideUi = () => {
-        uiController(false);
+        uiController("");
     };
 
     return (

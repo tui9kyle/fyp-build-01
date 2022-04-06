@@ -3,7 +3,7 @@ import { useState } from "react";
 import FileMenu from "./menubar/fileMenu";
 import AboutMenu from "./menubar/aboutMenu";
 
-const MenuBar = ({ dataFileName ,setUiFileTxt }) => {
+const MenuBar = ({ dataFileName ,setUiOverlayDir }) => {
     const [uiFileMenu, setUiFileMenu] = useState(false);
     const [uiAboutMenu, setUiAboutMenu] = useState(false);
     const callFileMenu = () => setUiFileMenu(!uiFileMenu);
@@ -35,7 +35,7 @@ const MenuBar = ({ dataFileName ,setUiFileTxt }) => {
                                 </a>
                             </div>
                             {uiFileMenu ? (
-                                <FileMenu setUiFileTxt={setUiFileTxt} />
+                                <FileMenu setUiOverlayDir={setUiOverlayDir} />
                             ) : null}
                         </div>
                         <div onMouseLeave={hideAboutMenu}>
