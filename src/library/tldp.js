@@ -39,7 +39,9 @@ export class TldpUtilities {
         let m = k - c0;
         // p_0
         if (j == 0) {
-            return 1 - TldpUtilities.EtmG(k, m);
+            let result = 1 - TldpUtilities.EtmG(k, m);
+            console.log("Dispatch Probability: k=" + k + " c0=" + c0 + " j=" + j + "  " + result);
+            return result;
         } else if (j == 1) {
             let sum1 = 0;
             for (let l = 1; l <= m; l++) {
@@ -53,7 +55,10 @@ export class TldpUtilities {
                 }
                 sum1 += Math.pow(-1 / c0, l) * product1;
             }
-            return TldpUtilities.EtmG(k, m) + sum1;
+
+            let result = TldpUtilities.EtmG(k, m) + sum1;
+            console.log("Dispatch Probability: k=" + k + " c0=" + c0 + " j=" + j + "  " + result);
+            return result;
         } else {
             // j > 1
             let sum1 = 0;
@@ -68,11 +73,13 @@ export class TldpUtilities {
                 }
                 sum1 += Math.pow(-1 / c0, l) * product1;
             }
-            return -1 * sum1;
+            let result = -1 * sum1;
+            console.log("Dispatch Probability: k=" + k + " c0=" + c0 + " j=" + j + "  " + result);
+            return result;
         }
     }
 
-    static EtmOptimalThreshold(k, c0) {
+    static EtmDerivedEpsilon(k, c0) {
 
 
 
@@ -88,11 +95,11 @@ export class TldpUtilities {
 
 
 
-        let optimalThreshold =
+        let derivedEpsilon =
             2.0 *
             Math.max(Math.log(p0 / p1), Math.log(pk_1 / p1));
 
-        return optimalThreshold;
+        return derivedEpsilon;
     }
 }
 
@@ -226,7 +233,7 @@ export class Tldp {
     }
 
     // Threshold Mechanism
-    static ThresholdMechanismExtendedPerturb(data, k, r, epsilon, p0, p1) {
+    static ThresholdMechanismExtendedPerturb(data, k, r, epsilon) {
         let dataPerturbed = [];
         let debugArr = [];
 
@@ -250,6 +257,8 @@ export class Tldp {
             } else if (dataPerturbed[i] == null) {
                 //  S_i is dispatched to R_i with p = (e^(\epsilon / 2) p_1) / p_2
 
+                let p1 = TldpUtilities.EtmDispatchProbability(k, r, 1);
+                let p0 = TldpUtilities.EtmDispatchProbability(k, r, 0);
                 let p = (Math.pow(Math.E, epsilon / 2) * p1) / p0;
                 let seed = Math.random();
                 if (seed < p) dataPerturbed[i] = data[i];
@@ -285,66 +294,52 @@ export class Tldp {
 
     // (Extended) Threshold Mechanism
     static ExtendedThresholdMechanism(data, k, epsilon) {
+
         // parameter epsilon: input privacy budget
 
         // initialize binary search range l = 2 and r = k - 1
-
         let l = 2;
         let r = k - 1;
-        let c0star;
+        let optimalThreshold;
+
         while (l < r) {
             let c0 = Math.floor((l + r) / 2);
-            let hatEpsilon1 = TldpUtilities.EtmOptimalThreshold(k, c0);
-            console.log("hatEpsilon1:" + hatEpsilon1);
-            if (hatEpsilon1 < epsilon) {
-                l = c0;
-                console.log("l = c0:" + l);
-            } else {
-                let hatEpsilon2 = TldpUtilities.EtmOptimalThreshold(k, c0 - 1);
-                console.log("hatEpsilon2:" + hatEpsilon2);
-                if (hatEpsilon2 > hatEpsilon1) l = c0;
-                else r = c0;
+            let derivedEpsilon1 = TldpUtilities.EtmDerivedEpsilon(k, c0);
+            console.log("derivedEpsilon1: " + derivedEpsilon1);
+            if (derivedEpsilon1 < epsilon) l = c0;
+            else {
+                let derivedEpsilon2 = TldpUtilities.EtmDerivedEpsilon(k, c0 - 1);
+                console.log("derivedEpsilon2: " + derivedEpsilon2);
+                if (derivedEpsilon2 > derivedEpsilon1) l = c0; else r = c0;
             }
+
             if (l + 1 == r) {
-
-                let hatEpsilon3 = TldpUtilities.EtmOptimalThreshold(k, l);
-                let hatEpsilon4 = TldpUtilities.EtmOptimalThreshold(k, r);
-
-                if (hatEpsilon3 <= epsilon) {
-                    c0star = l;
-                    break;
-                } else if (hatEpsilon4 <= epsilon) {
-                    c0star = r;
-                    break;
-                } else {
-                    // extended Threshold Mechanism
+                let derivedEpsilon3 = TldpUtilities.EtmDerivedEpsilon(k, l);
+                let derivedEpsilon4 = TldpUtilities.EtmDerivedEpsilon(k, r);
+                console.log("derivedEpsilon3: " + derivedEpsilon3);
+                console.log("derivedEpsilon4: " + derivedEpsilon4);
+                if (derivedEpsilon3 <= epsilon) { optimalThreshold = l; break; }
+                else if (derivedEpsilon4 <= epsilon) { optimalThreshold = r; break; }
+                else {
                     l = r;
                     r = k - 1;
                     while (l < r) {
                         c0 = Math.floor((l + r) / 2);
-                        let hatEpsilon5 = TldpUtilities.EtmOptimalThreshold(k, c0);
-                        if (hatEpsilon5 <= epsilon) r = c0;
-                        else l = c0;
-
+                        let derivedEpsilon5 = TldpUtilities.EtmDerivedEpsilon(k, c0);
+                        console.log("derivedEpsilon5: " + derivedEpsilon5);
+                        if (derivedEpsilon5 <= epsilon) r = c0; else l = c0;
                         if (l + 1 == r) {
-
-                            // return R ExtendedPerturb(S,k,r)
-                            console.log("ExtendedPerturb(S,k,r)");
-                            return Tldp.ThresholdMechanismExtendedPerturb(
-                                data,
-                                k,
-                                r,
-                                epsilon,
-                                TldpUtilities.EtmDispatchProbability(k, c0, 0),
-                                TldpUtilities.EtmDispatchProbability(k, c0, 1)
-                            );
+                            console.log("return: ThresholdMechanism Extended Perturb  k=" + k +" r=" + r);
+                            return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon);
                         }
                     }
                 }
+
             }
         }
-        console.log("ThresholdMechanism(S,k,c0star)");
-        console.log(k, c0star);
-        return Tldp.ThresholdMechanism(data, k, c0star);
+        console.log("return: ThresholdMechanism  k=" + k + " optimalThreshold=" + optimalThreshold );
+        return Tldp.ThresholdMechanism(data, k, optimalThreshold);
     }
+
+
 }
