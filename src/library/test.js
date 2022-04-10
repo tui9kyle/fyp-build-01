@@ -34,18 +34,16 @@ function EtmDispatchProbability(k, c0, j) {
         return result;
     } else if (j == 1) {
         // p_1
-
-
         let sum = 0;
         for (let l = 1; l <= m; l++) {
             console.log("l=" + l);
             let product1 = 1;
-
+            console.log("--- product1 ---");
             for (let i = 0; i <= l - 1; i++) {
 
 
                 let product2 = 1;
-                console.log("product2");
+                console.log("--- product2 ---");
                 for (let i = 1; i <= l; i++) {
 
                     let tmp = (k - 1 - i) / i;
@@ -53,7 +51,7 @@ function EtmDispatchProbability(k, c0, j) {
                     product2 *= tmp;
 
                 }
-
+                console.log("*** product2 ***");
                 console.log(EtmG(k - i, m - i));
                 console.log(product1);
                 console.log(product2);
@@ -64,6 +62,7 @@ function EtmDispatchProbability(k, c0, j) {
                 console.log(product1);
                 console.log(EtmG(k - i, m - i) * product2 / product1);
             }
+            console.log("*** product1 ***");
             console.log(c0, l)
 
             let tmp = -1 / c0;
