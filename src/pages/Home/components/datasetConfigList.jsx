@@ -5,7 +5,7 @@ const DatasetConfigList = ({ opt, optIdx }) => {
     else if (optIdx == null) {
         return (
             <div
-                className='basis-1/4  text-sm p-2 border-8 border-white  rounded-2xl relative'
+                className='basis-1/6  text-sm p-2 border-8 border-white  rounded-2xl relative'
                 style={{
                     backgroundColor: CustomColor.dull,
                     textShadow: `0 0 5rem ${CustomColor.dull}`,

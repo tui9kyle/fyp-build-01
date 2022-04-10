@@ -37,7 +37,7 @@ export class TldpUtilities {
         let m = k - c0;
         // p_0
         if (j == 0) {
-            let result = 1 - EtmG(k, m);
+            let result = 1 - TldpUtilities.EtmG(k, m);
             return result;
         } else if (j == 1) {
             // p_1
@@ -50,9 +50,9 @@ export class TldpUtilities {
                         let tmp = (k - 1 - i) / i;
                         product2 *= tmp;
                     }
-                    let tmp = EtmG(k - i, m - i);
+                    let tmp = TldpUtilities.EtmG(k - i, m - i);
                     tmp = tmp.toPrecision(9);
-                    product1 *= EtmG(k - i, m - i) * product2;
+                    product1 *= TldpUtilities.EtmG(k - i, m - i) * product2;
                 }
                 let tmp = -1 / c0;
                 tmp = tmp.toPrecision(9);
@@ -61,7 +61,7 @@ export class TldpUtilities {
                 product1 = product1.toPrecision(9)
                 sum += tmp2 * product1;
             }
-            return EtmG(k, m) + sum;
+            return TldpUtilities.EtmG(k, m) + sum;
 
 
         } else {
@@ -74,7 +74,7 @@ export class TldpUtilities {
                     for (let i = 1; i <= l - 1; i++) {
                         product2 *= ((k - j - i) / (i + 1)) * l;
                     }
-                    product1 *= EtmG(k - i, m - i) * product2;
+                    product1 *= TldpUtilities.EtmG(k - i, m - i) * product2;
                     product1 = product1.toPrecision(9);
                 }
                 sum1 += Math.pow(-1 / c0, l) * product1;

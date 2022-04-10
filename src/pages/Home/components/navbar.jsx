@@ -33,7 +33,7 @@ const NavBar = ({ navData }) => {
                     <NavBarItem name={"Data"} uiPath={uiPath} />
                     <NavBarItem name={"Perturbation"} uiPath={uiPath} />
                     <NavBarItem name={"Chart"} uiPath={uiPath} />
-                    <NavBarItem name={"Analysis"} uiPath={uiPath} />
+                    <NavBarItem name={"Statistics"} uiPath={uiPath} />
                 </ul>
             </div>
         </>

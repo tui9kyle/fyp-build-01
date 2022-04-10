@@ -29,7 +29,7 @@ const AppHome = () => {
 
     // ui
 
-    const [uiDir, setUiDir] = useState("Home");
+    const [uiDir, setUiDir] = useState("Data");
     const [uiOverlayDir, setUiOverlayDir] = useState("");
     return (
         <>
@@ -116,7 +116,7 @@ const AppHome = () => {
                 </div>
             ) : null}
 
-            {uiDir == "Analysis" ? (
+            {uiDir == "Statistics" ? (
                 <AnalysisView
                     dataRaw={dataRaw}
                     dataPerturbed={dataPerturbed}
