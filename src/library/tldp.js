@@ -18,9 +18,9 @@ export class TldpUtilities {
             let sum1 = 0;
             for (let l = 1; l <= m; l++) {
                 let product1 = 1;
-                for (let i1 = 1; i1 <= (l + 1); i1++) {
+                for (let i1 = 1; i1 <= l + 1; i1++) {
                     let product2 = 1;
-                    for (let i2 = 1; i2 <= (l - 1); i2++) {
+                    for (let i2 = 1; i2 <= l - 1; i2++) {
                         let tmp = TldpUtilities.EtmG(k - i2, m - i2);
                         product2 *= tmp;
                     }
@@ -56,14 +56,12 @@ export class TldpUtilities {
                 }
                 let tmp = -1 / c0;
                 tmp = tmp.toPrecision(9);
-                let tmp2 = (Math.pow(tmp, l));
+                let tmp2 = Math.pow(tmp, l);
                 tmp2 = tmp2.toPrecision(9);
-                product1 = product1.toPrecision(9)
+                product1 = product1.toPrecision(9);
                 sum += tmp2 * product1;
             }
             return TldpUtilities.EtmG(k, m) + sum;
-
-
         } else {
             // j > 1
             let sum1 = 0;
@@ -78,24 +76,21 @@ export class TldpUtilities {
                     product1 = product1.toPrecision(9);
                 }
                 sum1 += Math.pow(-1 / c0, l) * product1;
-
             }
             let result = -1 * sum1;
 
             return result;
-
         }
     }
     static EtmDerivedEpsilon(k, c0) {
         let p0 = TldpUtilities.EtmDispatchProbability(k, c0, 0);
         let p1 = TldpUtilities.EtmDispatchProbability(k, c0, 1);
         let pk_1 = TldpUtilities.EtmDispatchProbability(k, c0, k - 1);
-        p0 = parseFloat(p0).toPrecision(12)
-        p1 = parseFloat(p1).toPrecision(12)
-        pk_1 = parseFloat(pk_1).toPrecision(12)
+        p0 = parseFloat(p0).toPrecision(12);
+        p1 = parseFloat(p1).toPrecision(12);
+        pk_1 = parseFloat(pk_1).toPrecision(12);
         let derivedEpsilon =
-            2.0 *
-            Math.max(Math.log(p0 / p1), Math.log(pk_1 / p1));
+            2.0 * Math.max(Math.log(p0 / p1), Math.log(pk_1 / p1));
         return derivedEpsilon;
     }
 }
@@ -198,6 +193,7 @@ export class Tldp {
                 dataPerturbedFilled[i] = dataPerturbed[i];
             }
         }
+        console.log(dataPerturbed);
         return {
             result: dataPerturbed,
             debugArr,
@@ -262,16 +258,25 @@ export class Tldp {
         let optimalThreshold;
         while (l < r) {
             let c0 = Math.floor((l + r) / 2);
-            console.log("l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold);
+            console.log(
+                "l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold
+            );
             let derivedEpsilon1 = TldpUtilities.EtmDerivedEpsilon(k, c0);
             console.log("derivedEpsilon1: " + derivedEpsilon1);
             if (derivedEpsilon1 < epsilon) l = c0;
             else {
-                let derivedEpsilon2 = TldpUtilities.EtmDerivedEpsilon(k, c0 - 1);
+                let derivedEpsilon2 = TldpUtilities.EtmDerivedEpsilon(
+                    k,
+                    c0 - 1
+                );
                 console.log("derivedEpsilon2: " + derivedEpsilon2);
-                if (derivedEpsilon2 > derivedEpsilon1 || isNaN(derivedEpsilon2)) l = c0; else r = c0;
+                if (derivedEpsilon2 > derivedEpsilon1 || isNaN(derivedEpsilon2))
+                    l = c0;
+                else r = c0;
             }
-            console.log("l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold);
+            console.log(
+                "l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold
+            );
             if (l + 1 == r) {
                 let derivedEpsilon3 = TldpUtilities.EtmDerivedEpsilon(k, l);
                 let derivedEpsilon4 = TldpUtilities.EtmDerivedEpsilon(k, r);
@@ -279,34 +284,74 @@ export class Tldp {
                 console.log("derivedEpsilon4: " + derivedEpsilon4);
                 if (derivedEpsilon3 <= epsilon) {
                     optimalThreshold = l;
-                    console.log("l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold);
+                    console.log(
+                        "l:" +
+                            l +
+                            " r:" +
+                            r +
+                            " c0:" +
+                            c0 +
+                            " c0*: " +
+                            optimalThreshold
+                    );
                     break;
-                }
-                else if (derivedEpsilon4 <= epsilon) {
+                } else if (derivedEpsilon4 <= epsilon) {
                     optimalThreshold = r;
-                    console.log("l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold);
+                    console.log(
+                        "l:" +
+                            l +
+                            " r:" +
+                            r +
+                            " c0:" +
+                            c0 +
+                            " c0*: " +
+                            optimalThreshold
+                    );
                     break;
-                }
-                else {
+                } else {
                     l = r;
                     r = k - 1;
-                    console.log("l:" + l + " r:" + r + " c0:" + c0 + " c0*: " + optimalThreshold);
+                    console.log(
+                        "l:" +
+                            l +
+                            " r:" +
+                            r +
+                            " c0:" +
+                            c0 +
+                            " c0*: " +
+                            optimalThreshold
+                    );
                     while (l < r) {
                         c0 = Math.floor((l + r) / 2);
-                        let derivedEpsilon5 = TldpUtilities.EtmDerivedEpsilon(k, c0);
+                        let derivedEpsilon5 = TldpUtilities.EtmDerivedEpsilon(
+                            k,
+                            c0
+                        );
                         console.log("derivedEpsilon5: " + derivedEpsilon5);
-                        if (derivedEpsilon5 <= epsilon) r = c0; else l = c0;
+                        if (derivedEpsilon5 <= epsilon) r = c0;
+                        else l = c0;
                         if (l + 1 == r) {
                             // return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon);
-                            console.log("return: ThresholdMechanism  k=" + k + " optimalThreshold=" + optimalThreshold);
-                            return Tldp.ThresholdMechanism(data, k, optimalThreshold);
+                            console.log(
+                                "return: ThresholdMechanism  k=" +
+                                    k +
+                                    " optimalThreshold=" +
+                                    optimalThreshold
+                            );
+                            return Tldp.ThresholdMechanism(
+                                data,
+                                k,
+                                optimalThreshold
+                            );
                         }
                     }
                 }
             }
         }
         // return Tldp.ThresholdMechanism(data, k, optimalThreshold);
-        console.log("return: ThresholdMechanism Extended Perturb  k=" + k + " r=" + r);
+        console.log(
+            "return: ThresholdMechanism Extended Perturb  k=" + k + " r=" + r
+        );
         return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon);
     }
 }
