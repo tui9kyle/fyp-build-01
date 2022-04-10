@@ -27,7 +27,6 @@ function EtmG(k, m) {
 function EtmDispatchProbability(k, c0, j) {
     // m = k - c0
     let m = k - c0;
-    console.log(m);
     // p_0
     if (j == 0) {
         let result = 1 - EtmG(k, m);
@@ -36,66 +35,45 @@ function EtmDispatchProbability(k, c0, j) {
         // p_1
         let sum = 0;
         for (let l = 1; l <= m; l++) {
-            console.log("l=" + l);
             let product1 = 1;
-            console.log("--- product1 ---");
             for (let i = 0; i <= l - 1; i++) {
-
-
                 let product2 = 1;
-                console.log("--- product2 ---");
                 for (let i = 1; i <= l; i++) {
-
                     let tmp = (k - 1 - i) / i;
-
                     product2 *= tmp;
-
                 }
-                console.log("*** product2 ***");
-                console.log(EtmG(k - i, m - i));
-                console.log(product1);
-                console.log(product2);
                 let tmp = EtmG(k - i, m - i);
-                tmp = tmp.toPrecision(8);
-                console.log(tmp);
+                tmp = tmp.toPrecision(9);
                 product1 *= EtmG(k - i, m - i) * product2;
-                console.log(product1);
-                console.log(EtmG(k - i, m - i) * product2 / product1);
             }
-            console.log("*** product1 ***");
-            console.log(c0, l)
-
             let tmp = -1 / c0;
-            tmp = tmp.toPrecision(8);
+            tmp = tmp.toPrecision(9);
             let tmp2 = (Math.pow(tmp, l));
-            tmp2 = tmp2.toPrecision(8);
-            product1 = product1.toPrecision(8)
-            console.log(tmp);
-            console.log(tmp2);
-            console.log(product1);
-            console.log(sum);
-            console.log(tmp2 * product1);
-
+            tmp2 = tmp2.toPrecision(9);
+            product1 = product1.toPrecision(9)
             sum += tmp2 * product1;
-
         }
-
         return EtmG(k, m) + sum;
+
+
     } else {
         // j > 1
         let sum1 = 0;
         for (let l = 1; l <= m; l++) {
             let product1 = 1;
-            for (let i = 0; i <= (l - 1); i++) {
+            for (let i = 0; i <= l - 1; i++) {
                 let product2 = 1;
-                for (let i = 1; i <= (l - 1); i++) {
+                for (let i = 1; i <= l - 1; i++) {
                     product2 *= ((k - j - i) / (i + 1)) * l;
                 }
                 product1 *= EtmG(k - i, m - i) * product2;
+                product1 = product1.toPrecision(9);
             }
             sum1 += Math.pow(-1 / c0, l) * product1;
+           
         }
         let result = -1 * sum1;
+     
         return result;
     }
 }
@@ -112,24 +90,29 @@ function EtmDerivedEpsilon(k, c0) {
     return derivedEpsilon;
 }
 
-function optimalThreshold(k, epsilon) {
+function optimalThreshold(k,epsilon) {
     let optimalThreshold = -1;
-    let derivedEpsilon;
+    let derivedEpsilon = 0;
     for (let i = 2; i < k; i++) {
         let tmp = EtmDerivedEpsilon(k, i);
         console.log(i + "=" + tmp);
-        if (tmp <= epsilon) {
-            derivedEpsilon = derivedEpsilon < tmp ? tmp : derivedEpsilon;
+if (epsilon > tmp) continue;
+if (derivedEpsilon < tmp && tmp < epsilon){
+    
+}
+        if ( derivedEpsilon < tmp ) {
+
+        derivedEpsilon = tmp ;
             optimalThreshold = i;
-        }
+       }
+            
+        
     }
     return optimalThreshold;
 }
 
-let k = 5;
-let epsilon = 1
 
-// console.log(optimalThreshold(k, epsilon));
+console.log(optimalThreshold(5, 1));
 
 
 
@@ -138,21 +121,18 @@ let epsilon = 1
 
 
 
-
-let p = parseFloat(Math.pow(Math.E, epsilon / 2)).toPrecision(9);
-
 // console.log(p1 / p0);
 // console.log(p1);
 // console.log(p0);
 // console.log(p);
 
+let k = 6;
 
-// for (let i = 0; i < k; i++) {
-//     console.log(EtmDispatchProbability(k, Math.floor(k / 2), i));
-// }
+for (let i = 0; i < k; i++) {
+    console.log(EtmDispatchProbability(k, Math.floor(k / 2), i));
+}
 
 
 
 
-console.log(EtmDispatchProbability(5, 3, 1))
 

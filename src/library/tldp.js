@@ -21,7 +21,7 @@ export class TldpUtilities {
                 for (let i1 = 1; i1 <= (l + 1); i1++) {
                     let product2 = 1;
                     for (let i2 = 1; i2 <= (l - 1); i2++) {
-                        let tmp = EtmG(k - i2, m - i2);
+                        let tmp = TldpUtilities.EtmG(k - i2, m - i2);
                         product2 *= tmp;
                     }
                     product1 *= ((k - i1) / i1) * product2;
@@ -62,6 +62,8 @@ export class TldpUtilities {
                 sum += tmp2 * product1;
             }
             return EtmG(k, m) + sum;
+
+
         } else {
             // j > 1
             let sum1 = 0;
@@ -72,13 +74,16 @@ export class TldpUtilities {
                     for (let i = 1; i <= l - 1; i++) {
                         product2 *= ((k - j - i) / (i + 1)) * l;
                     }
-                    product1 *= TldpUtilities.EtmG(k - i, m - i) * product2;
+                    product1 *= EtmG(k - i, m - i) * product2;
+                    product1 = product1.toPrecision(9);
                 }
                 sum1 += Math.pow(-1 / c0, l) * product1;
+
             }
             let result = -1 * sum1;
-            console.log("Dispatch Probability: k=" + k + " c0=" + c0 + " j=" + j + "  " + result);
+
             return result;
+
         }
     }
     static EtmDerivedEpsilon(k, c0) {
