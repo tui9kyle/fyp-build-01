@@ -19,7 +19,6 @@ const AppHome = () => {
         filename: "",
     });
 
-
     // data
     const [dataRaw, setDataRaw] = useState();
     const [dataPerturbed, setDataPerturbed] = useState([]);
@@ -38,7 +37,10 @@ const AppHome = () => {
                 dataFileName={dataFileMeta.filename}
             />
 
-            <NavBar navData={{ uiDir: uiDir, setUiDir: setUiDir }} />
+            <NavBar
+                navData={{ uiDir: uiDir, setUiDir: setUiDir }}
+                waitData={!dataRaw}
+            />
 
             {uiDir == "Data" ? (
                 <DataListView
@@ -47,7 +49,6 @@ const AppHome = () => {
                     dataFileMeta={dataFileMeta}
                     DatasetConfigList={DatasetConfigList}
                     ldpOptions={ldpOptions}
-                   
                 />
             ) : null}
 
@@ -123,7 +124,6 @@ const AppHome = () => {
                     dataFileMeta={dataFileMeta}
                     DatasetConfigList={DatasetConfigList}
                     ldpOptions={ldpOptions}
-               
                 />
             ) : null}
         </>
