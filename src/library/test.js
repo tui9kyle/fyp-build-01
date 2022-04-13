@@ -80,28 +80,31 @@ function EtmDerivedEpsilon(k, c0) {
     p0 = parseFloat(p0).toPrecision(9);
     p1 = parseFloat(p1).toPrecision(9);
     pk_1 = parseFloat(pk_1).toPrecision(9);
-    let derivedEpsilon = 2.0 * Math.max(Math.log(p0 / p1), Math.log(pk_1 / p1));
+
+    let a = Math.log(p1 / p0);
+    let b = Math.log(p1 / pk_1);
+
+    let derivedEpsilon = 2.0 * Math.max(a, b);
     return derivedEpsilon;
 }
 
 function optimalThreshold(k, epsilon) {
     let optimalThreshold = -1;
-    let derivedEpsilon = 0;
+   
     for (let i = 2; i < k; i++) {
         let tmp = EtmDerivedEpsilon(k, i);
+        tmp = parseFloat(tmp).toPrecision(9);
         console.log(i + "=" + tmp);
-        if (epsilon > tmp) continue;
-        if (derivedEpsilon < tmp && tmp < epsilon) {
-        }
-        if (derivedEpsilon < tmp) {
-            derivedEpsilon = tmp;
-            optimalThreshold = i;
+        if ( tmp < epsilon ){
+
+            optimalThreshold =  i;
+           break;
         }
     }
     return optimalThreshold;
 }
 
-console.log(optimalThreshold(5, 1));
+console.log(optimalThreshold(6, 1));
 
 // let p0 = EtmDispatchProbability(k, Math.floor(k / 2), 0)
 // let p1 = EtmDispatchProbability(k, Math.floor(k / 2), 1)
@@ -111,8 +114,3 @@ console.log(optimalThreshold(5, 1));
 // console.log(p0);
 // console.log(p);
 
-let k = 6;
-
-for (let i = 0; i < k; i++) {
-    console.log(EtmDispatchProbability(k, Math.floor(k / 2), i));
-}

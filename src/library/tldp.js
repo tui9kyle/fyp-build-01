@@ -86,12 +86,31 @@ export class TldpUtilities {
         let p0 = TldpUtilities.EtmDispatchProbability(k, c0, 0);
         let p1 = TldpUtilities.EtmDispatchProbability(k, c0, 1);
         let pk_1 = TldpUtilities.EtmDispatchProbability(k, c0, k - 1);
-        p0 = parseFloat(p0).toPrecision(12);
-        p1 = parseFloat(p1).toPrecision(12);
-        pk_1 = parseFloat(pk_1).toPrecision(12);
-        let derivedEpsilon =
-            2.0 * Math.max(Math.log(p0 / p1), Math.log(pk_1 / p1));
+        p0 = parseFloat(p0).toPrecision(9);
+        p1 = parseFloat(p1).toPrecision(9);
+        pk_1 = parseFloat(pk_1).toPrecision(9);
+
+        let a = Math.log(p1 / p0);
+        let b = Math.log(p1 / pk_1);
+
+        let derivedEpsilon = 2.0 * Math.max(a, b);
         return derivedEpsilon;
+    }
+
+    static optimalThreshold(k, epsilon) {
+        let optimalThreshold = -1;
+
+        for (let i = 2; i < k; i++) {
+            let tmp = TldpUtilities.EtmDerivedEpsilon(k, i);
+            tmp = parseFloat(tmp).toPrecision(9);
+
+            if (tmp < epsilon) {
+
+                optimalThreshold = i;
+                break;
+            }
+        }
+        return optimalThreshold;
     }
 }
 export class Tldp {
@@ -222,7 +241,11 @@ export class Tldp {
                 //  S_i is dispatched to R_i with p = (e^(\epsilon / 2) p_1) / p_2
                 let p1 = TldpUtilities.EtmDispatchProbability(k, r, 1);
                 let p0 = TldpUtilities.EtmDispatchProbability(k, r, 0);
+                p0 = parseFloat(p0).toPrecision(9);
+                p1 = parseFloat(p1).toPrecision(9);
+
                 let p = (Math.pow(Math.E, epsilon / 2) * p1) / p0;
+                console.log(p);
                 let seed = Math.random();
                 if (seed < p) dataPerturbed[i] = data[i];
             } else {
@@ -250,7 +273,7 @@ export class Tldp {
         };
     }
     // (Extended) Threshold Mechanism
-    static ExtendedThresholdMechanism(data, k, epsilon) {
+    static ExtendedThresholdMechanismTest(data, k, epsilon) {
         // parameter epsilon: input privacy budget
         // initialize binary search range l = 2 and r = k - 1
         let l = 2;
@@ -286,26 +309,26 @@ export class Tldp {
                     optimalThreshold = l;
                     console.log(
                         "l:" +
-                            l +
-                            " r:" +
-                            r +
-                            " c0:" +
-                            c0 +
-                            " c0*: " +
-                            optimalThreshold
+                        l +
+                        " r:" +
+                        r +
+                        " c0:" +
+                        c0 +
+                        " c0*: " +
+                        optimalThreshold
                     );
                     break;
                 } else if (derivedEpsilon4 <= epsilon) {
                     optimalThreshold = r;
                     console.log(
                         "l:" +
-                            l +
-                            " r:" +
-                            r +
-                            " c0:" +
-                            c0 +
-                            " c0*: " +
-                            optimalThreshold
+                        l +
+                        " r:" +
+                        r +
+                        " c0:" +
+                        c0 +
+                        " c0*: " +
+                        optimalThreshold
                     );
                     break;
                 } else {
@@ -313,13 +336,13 @@ export class Tldp {
                     r = k - 1;
                     console.log(
                         "l:" +
-                            l +
-                            " r:" +
-                            r +
-                            " c0:" +
-                            c0 +
-                            " c0*: " +
-                            optimalThreshold
+                        l +
+                        " r:" +
+                        r +
+                        " c0:" +
+                        c0 +
+                        " c0*: " +
+                        optimalThreshold
                     );
                     while (l < r) {
                         c0 = Math.floor((l + r) / 2);
@@ -334,9 +357,9 @@ export class Tldp {
                             // return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon);
                             console.log(
                                 "return: ThresholdMechanism  k=" +
-                                    k +
-                                    " optimalThreshold=" +
-                                    optimalThreshold
+                                k +
+                                " optimalThreshold=" +
+                                optimalThreshold
                             );
                             return Tldp.ThresholdMechanism(
                                 data,
@@ -353,5 +376,17 @@ export class Tldp {
             "return: ThresholdMechanism Extended Perturb  k=" + k + " r=" + r
         );
         return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon);
+    }
+
+    // (Extended) Threshold Mechanism
+    static ExtendedThresholdMechanism(data, k, epsilon) {
+        let optimalThresholdValue = TldpUtilities.optimalThreshold(k, epsilon);
+        let r = Math.floor(k / 2);
+        if (optimalThresholdValue == -1) {
+            return Tldp.ThresholdMechanismExtendedPerturb(data, k, r, epsilon)
+        } else {
+            return Tldp.ThresholdMechanism(data, k, optimalThresholdValue);
+        }
+
     }
 }

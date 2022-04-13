@@ -19,10 +19,26 @@ const About = ({ uiController }) => {
                 <div className='relative h-fit w-fit px-8 py-3 bg-slate-50 rounded shadow-md flex flex-col'>
                     <div className='mt-2'>
                         <h1 className='text-3xl font-bold'>About this Project</h1>
-            
+
                     </div>
-                    <div className='my-2'>
-           
+                    <div className='my-2 flex flex-col text-center p-4'>
+                        <div className="">
+                            <h2 className="text-xl font-bold">Differentially Private Time Series Data Release</h2>
+
+                            <p className="font-bold">EIE4430 Honours Project</p>
+
+
+                        </div>
+
+                        <div>
+                            <p>This application would perturb and show the data with Local Differential Privacy mechanisms</p>
+                        </div>
+
+                        <div className="my-4">
+                            <h3 className="font-bold text-xl">Acknowledgment</h3>
+                            <p>The demo dataset is an extract of Heart rate time series in MIT-BIH Database Distribution </p>
+                        </div>
+
                     </div>
                     <div className='flex self-end mb-2'>
                         <button
