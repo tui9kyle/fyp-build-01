@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import FileInput from "./components/fileInput/fileInput";
 import LoadDemoData from "./components/fileInput/demoData";
+import About from "./components/about//about";
 
 import LdpOptions from "./components/ldpOptions";
 import DataChart from "./components/dataChart";
@@ -68,6 +69,13 @@ const AppHome = () => {
                 />
             ) : null}
 
+            {uiOverlayDir == "About" ? (
+                <About
+
+                    uiController={setUiOverlayDir}
+
+                />
+            ) : null}
             {uiDir == "Perturbation" ? (
                 <div className='app'>
                     {/* <DargDiv /> */}

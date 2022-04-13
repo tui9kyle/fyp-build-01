@@ -47,7 +47,7 @@ const MenuBar = ({ dataFileName ,setUiOverlayDir }) => {
                                     About
                                 </a>
                             </div>
-                            {uiAboutMenu ? <AboutMenu /> : null}
+                            {uiAboutMenu ? <AboutMenu setUiOverlayDir={setUiOverlayDir} /> : null}
                         </div>
                     </div>
                     <div className='grow flex justify-center  items-stretch'>

@@ -19,6 +19,7 @@ const DataChart = ({ data }) => {
     chartHeight = 250;
 
     if (data["dataRaw"] != null) {
+
         chartMin = Math.min(...data["dataRaw"]);
         chartMax = Math.max(...data["dataRaw"]);
         chartLabels = Array(data["dataRaw"].length).fill("");
@@ -44,13 +45,14 @@ const DataChart = ({ data }) => {
 
     for (let i = 0; i < data["dataPerturbed"].length; i++) {
         let r = data["dataPerturbed"][i]["result"];
+        let r_num = r.filter((e) => !isNaN(e));
         // chart config
-        if (Math.min(...r) < chartMin) {
-            chartMin = Math.min(...r) == 0 ? chartMin : Math.min(...r);
-        }
-        if (Math.max(...r) > chartMax) {
-            chartMin = Math.max(...r);
-        }
+        // if (Math.min(...r) < chartMin) {
+        //     chartMin = Math.min(...r_num) == 0 ? chartMin : Math.min(...r_num);
+        // }
+        // if (Math.max(...r_num) > chartMax) {
+        //     chartMin = Math.max(...r_num);
+        // }
         if (r.length > chartLabels.length) {
             chartLabels = Array(r.length).fill("");
             chartWidth =
