@@ -407,6 +407,7 @@ $k = 25$
   - better performance as the perturbed results are more usable
 
 ---
+# Choosing the Perturbation Mechanism
 
 
 
