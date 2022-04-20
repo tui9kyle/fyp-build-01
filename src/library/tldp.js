@@ -242,12 +242,15 @@ export class Tldp {
                 //  S_i is dispatched to R_i with p = (e^(\epsilon / 2) p_1) / p_2
                 let p1 = TldpUtilities.EtmDispatchProbability(k, r, 1);
                 let p0 = TldpUtilities.EtmDispatchProbability(k, r, 0);
-                p0 = parseFloat(p0).toPrecision(9);
-                p1 = parseFloat(p1).toPrecision(9);
-
-                let p = (Math.pow(Math.E, epsilon / 2) * p1) / p0;
+                p0 = parseFloat(p0).toPrecision(5);
+                p1 = parseFloat(p1).toPrecision(5);
+if (p1 <= 0) p1 = 0.001;
+                let p = (Math.pow(Math.E, epsilon / 2) * p0) / p1;
+console.log(p0);
+console.log(p1);
                 console.log(p);
                 let seed = Math.random();
+                console.log(seed);
                 if (seed < p) dataPerturbed[i] = data[i];
             } else {
                 let p = Math.random();
