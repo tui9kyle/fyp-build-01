@@ -101,8 +101,6 @@ CHOW Lap Fung
 -   Introduction
 -   Methodology
 -   Evaluation
--   Discussion
--   Project Implementation
 -   Conclusion
 
 
@@ -270,11 +268,29 @@ $$
 
 ---
 
-# Threshold Mechanism
+### Missing costs in Backward / Forward Perturbation Mechanism
+- due to repeatedly selecting from / dispatching the value to the same timestamp
 
+---
+
+# Threshold Mechanism
+- reduced the missing cost of Backward / Forward Perturbation Mechanism
+- add the rule to the collision-free Forward Perturbation Mechanism
+---
+# Threshold Mechanism
+- windows size k and threshold
+- value of threshold should be in the range from 2 to k – 1
+- if the number of empty slots in the current window is greater than the threshold, the data would be dispatched randomly to an empty slot of the window
+- Otherwise, if the number of empty slots is less than or equal to the threshold, and the current slot of the perturbed data sequence is empty, the data would be dispatch to this slot
 
 ---
 # Extended Threshold Mechanism
+- to configure the mechanism with the privacy budget ϵ instead of the threshold
+-  calculate the derived privacy budget ϵ ̂ for the possible thresholds
+-  optimal threshold is found
+   -  Threshold Mechanism with optimal threshold
+-  optimal threshold is NOT found
+   -  Extended Perturbation would be applied
 
 
 
@@ -288,18 +304,20 @@ $$
 
 ---
 # Development Stack
-| Tool             | Description             |     |
-| ---------------- | ----------------------- | --- |
-| **Node.Js**      | runtime environment     | [5] |
-| **Electron**     | application framework   | [6] |
-| **React**        | building user interface | [7] |
-| **Tailwind CSS** | styling                 | [8] |
-| **Chart.js**     | creating charts         | [9] |
-
+| Tool                  | Description                 |      |
+| --------------------- | --------------------------- | ---- |
+| **Node.Js**           | runtime environment         | [5]  |
+| **Electron**          | application framework       | [6]  |
+| **React**             | building user interface     | [7]  |
+| **Tailwind CSS**      | styling                     | [8]  |
+| **Chart.js**          | creating charts             | [9]  |
+| **Simple Statistics** | statistics iimplementations | [10] |
 
 ---
 # User Interface
-![w:380](./.assets/img04.png) ![w:380](./.assets/img03.png) 
+ 
+
+![image-20220419151926899](.assets/image-20220419151926899.png)
 
 ---
 # Data and parameter inputs
@@ -328,6 +346,7 @@ $$
 # Data Sources
 - Heart rate time series from MIT-BIH Database Distribution
 - Datasets from UC Irvine Machine Learning Repository
+
 
 
 ---
@@ -379,7 +398,16 @@ $k = 25$
 ![](./.assets/img-k-25.png)
 
 ---
-<!-- footer: "Project Implementation" -->
+# Perturbation Mechanism
+- LDP in value settings are not a suitable choice
+  - significant distortion of the values in time-series data
+- Backward / Forward Perturbation Mechanism
+  - simple implementation
+- Threshold Mechanism
+  - better performance as the perturbed results are more usable
+
+---
+
 
 
 <style scoped>
@@ -399,40 +427,29 @@ td {
 footer {margin-top :0 !important}
 </style>
 
-
-# Project Schedule
-| Project Task / Milestone             |      Date       |  Status  |
-| ------------------------------------ | :-------------: | :------: |
-| Project Planning                     | 1 Sep - 15 Sep  | Finished |
-| Research and Analysis                | 1 Sep – 28 Nov  | Finished |
-| Project Proposal                     |     15 Sep      | Finished |
-| Software Development                 | 29 Nov - 28 Feb |   WIP    |
-| Implementation of TLDP algorithm     | 3 Jan - 28 Feb  |   WIP    |
-| Interim Report                       |     28 Dec      | Finished |
-| Interim Project Presentation         |      6 Jan      |
-| System Evaluation                    | 1 Feb - 27 Mar  |
-| Preparation of Final Project         | 28 Mar - 10 Apr |
-| Final Project Report                 |     11 Apr      |
-| Preparation of Final Presentation    | 12 Apr - 19 Apr |
-| Final Presentation                   |     20 Apr      |
-| Preparation of Project Demonstration | 21 Apr - 10 May |
-| Project Demonstration                |     11 May      |
+<!-- footer: "Conclusion" -->
 ---
 
-# Proposed Future Work
-- Implementation of Threshold Mechanism
-  - Threshold Mechanism
-  - Extended Threshold Mechanism
 
-- Data analysis of the perturbed data
-  - to observe the data utilization after implementing
-TLDP
+# Recommendations for further development
+- implement binary search in Extended Threshold Mechanism
+  - reduce time complexity of finding optimal threshold
+- accept more file formats for data inputs
 
-- Improvement on the User Interface
-    - manipulating the LDP settings
-    - enhance the graphical representation of data
+- analysis perturbed data with groups and data prediction
+  - to evaluate the results for more use cases
 
 
+----
+
+# Conclusion
+- This project has achieved its objectives
+  - implementation of local differential privacy in temporal setting mechanisms
+  - presentation of perturbed data of time-series datasets
+  - analyzing of data perturbation
+- an application that implements the local differential privacy in temporal setting mechanisms is developed
+  - investigate the perturbation mechanisms
+  - evaluate the perturbed data with statistical implementations
 
 ---
 <!-- footer: "References" -->
