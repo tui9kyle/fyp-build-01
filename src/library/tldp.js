@@ -104,7 +104,7 @@ export class TldpUtilities {
             let tmp = TldpUtilities.EtmDerivedEpsilon(k, i);
             tmp = parseFloat(tmp).toPrecision(3);
 
-            if (tmp < epsilon && tmp > 0) {
+            if (tmp < epsilon && tmp > 0.05) {
 
                 optimalThreshold = i;
                 break;
