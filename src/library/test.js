@@ -93,9 +93,9 @@ function optimalThreshold(k, epsilon) {
    
     for (let i = 2; i < k; i++) {
         let tmp = EtmDerivedEpsilon(k, i);
-        tmp = parseFloat(tmp).toPrecision(9);
+        tmp = parseFloat(tmp).toPrecision(3);
         console.log(i + "=" + tmp);
-        if ( tmp < epsilon ){
+        if ( tmp < epsilon && tmp > 0){
 
             optimalThreshold =  i;
            break;
@@ -104,7 +104,7 @@ function optimalThreshold(k, epsilon) {
     return optimalThreshold;
 }
 
-console.log(optimalThreshold(6, 1));
+console.log(optimalThreshold(3, 0.1));
 
 // let p0 = EtmDispatchProbability(k, Math.floor(k / 2), 0)
 // let p1 = EtmDispatchProbability(k, Math.floor(k / 2), 1)

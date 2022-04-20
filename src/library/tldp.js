@@ -102,14 +102,15 @@ export class TldpUtilities {
 
         for (let i = 2; i < k; i++) {
             let tmp = TldpUtilities.EtmDerivedEpsilon(k, i);
-            tmp = parseFloat(tmp).toPrecision(9);
+            tmp = parseFloat(tmp).toPrecision(3);
 
-            if (tmp < epsilon) {
+            if (tmp < epsilon && tmp > 0) {
 
                 optimalThreshold = i;
                 break;
             }
         }
+        console.log(optimalThreshold);
         return optimalThreshold;
     }
 }
