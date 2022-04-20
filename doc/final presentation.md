@@ -408,7 +408,9 @@ $k = 25$
 
 ---
 # Choosing the Perturbation Mechanism
-
+- Backward Perturbation Mechanism
+- Forward Perturbation Mechanism
+- Threshold Mechanism
 
 
 <style scoped>
