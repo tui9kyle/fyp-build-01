@@ -90,10 +90,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.sum -
-                                                        results[0].sum) /
-                                                        results[0].sum) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.sum -
+                                                            results[0].sum) /
+                                                            results[0].sum
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -107,10 +108,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.max -
-                                                        results[0].max) /
-                                                        results[0].max) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.max -
+                                                            results[0].max) /
+                                                            results[0].max
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -123,10 +125,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.min -
-                                                        results[0].min) /
-                                                        results[0].min) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.min -
+                                                            results[0].min) /
+                                                            results[0].min
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -142,10 +145,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.mean -
-                                                        results[0].mean) /
-                                                        results[0].mean) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.mean -
+                                                            results[0].mean) /
+                                                            results[0].mean
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -159,10 +163,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.mode -
-                                                        results[0].mode) /
-                                                        results[0].mode) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.mode -
+                                                            results[0].mode) /
+                                                            results[0].mode
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -175,10 +180,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.median -
-                                                        results[0].median) /
-                                                        results[0].median) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.median -
+                                                            results[0].median) /
+                                                            results[0].median
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -191,10 +197,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.rms -
-                                                        results[0].rms) /
-                                                        results[0].rms) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.rms -
+                                                            results[0].rms) /
+                                                            results[0].rms
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -207,10 +214,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.skew -
-                                                        results[0].skew) /
-                                                        results[0].skew) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.skew -
+                                                            results[0].skew) /
+                                                            results[0].skew
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -227,10 +235,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.var -
-                                                        results[0].var) /
-                                                        results[0].var) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.var -
+                                                            results[0].var) /
+                                                            results[0].var
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -243,9 +252,11 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.sd - results[0].sd) /
-                                                        results[0].sd) *
-                                                        100}
+                                                    {Math.abs(
+                                                        (ctx.sd -
+                                                            results[0].sd) /
+                                                            results[0].sd
+                                                    ) * 100}
                                                     %)
                                                 </>
                                             ) : null}
@@ -258,7 +269,7 @@ const AnalysisView = ({ dataRaw, dataPerturbed, dataFileMeta, ldpOptions }) => {
                                             {idx != 0 ? (
                                                 <>
                                                     (
-                                                    {((ctx.iqr -
+                                                    {Math.abs((ctx.iqr -
                                                         results[0].iqr) /
                                                         results[0].iqr) *
                                                         100}
