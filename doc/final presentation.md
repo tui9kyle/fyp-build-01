@@ -304,13 +304,13 @@ $$
 
 ---
 # Development Stack
-| Tool                  | Description                 |      |
-| --------------------- | --------------------------- | ---- |
-| **Node.Js**           | runtime environment         | [5]  |
-| **Electron**          | application framework       | [6]  |
-| **React**             | building user interface     | [7]  |
-| **Tailwind CSS**      | styling                     | [8]  |
-| **Chart.js**          | creating charts             | [9]  |
+| Tool                  | Description                |      |
+| --------------------- | -------------------------- | ---- |
+| **Node.Js**           | runtime environment        | [5]  |
+| **Electron**          | application framework      | [6]  |
+| **React**             | building user interface    | [7]  |
+| **Tailwind CSS**      | styling                    | [8]  |
+| **Chart.js**          | creating charts            | [9]  |
 | **Simple Statistics** | statistics implementations | [10] |
 
 ---
@@ -408,9 +408,24 @@ $k = 25$
 
 ---
 # Choosing the Perturbation Mechanism
-- Backward Perturbation Mechanism
-- Forward Perturbation Mechanism
-- Threshold Mechanism
+for given ε and k
+
+- ε can be derived under 
+  - Threshold Mechanism
+- ε is extremely small (e.g. < 1) or k is very large (e.g., k > 100)
+  - Extended Threshold mechanism
+- For other cases
+  - Forward / Backward perturbation mechanism
+  - depends on which perturbation performs better
+
+---
+# Choosing the Perturbation Mechanism
+- **Frequency** counting
+  - Threshold / Extended Threshold Mechanism
+- Simple moving **average** (e.g. Stock market)
+  - Forward Perturbation Mechanism
+
+
 
 
 <style scoped>
