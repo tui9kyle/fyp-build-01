@@ -311,7 +311,7 @@ $$
 | **React**             | building user interface     | [7]  |
 | **Tailwind CSS**      | styling                     | [8]  |
 | **Chart.js**          | creating charts             | [9]  |
-| **Simple Statistics** | statistics iimplementations | [10] |
+| **Simple Statistics** | statistics implementations | [10] |
 
 ---
 # User Interface
